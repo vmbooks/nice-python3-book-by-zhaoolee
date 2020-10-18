@@ -1,0 +1,848 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Tensorflow可视化编程 - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    <link rel="next" href="knnPrediction.html" />
+    <link rel="prev" href="NaiveBayesNews.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >Tensorflow可视化编程</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5B89;&#x88C5;tensoflow10">&#x5B89;&#x88C5;Tensoflow1.0</h1>
+<h2 id="linuxubuntu">Linux/ubuntu:</h2>
+<ul>
+<li>python2.7: <pre><code>pip install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp27-none-linux_x86_64.whl
+</code></pre></li>
+<li>python3.5:<pre><code>pip3 install https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp35-cp35m-linux_x86_64.whl
+</code></pre></li>
+</ul>
+<h2 id="maxos">Maxos:</h2>
+<ul>
+<li>python2: <pre><code>pip install https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.1-py2-none-any.whl
+</code></pre></li>
+<li>python3: <pre><code>pip3 install https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.1-py3-none-any.whl
+</code></pre></li>
+</ul>
+<h3 id="tensorflow&#x5B8C;&#x6210;&#x52A0;&#x6CD5;">Tensorflow&#x5B8C;&#x6210;&#x52A0;&#x6CD5;</h3>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
+<span class="hljs-comment"># &#x6D88;&#x9664;&#x8B66;&#x544A;(&#x4F7F;&#x7528;&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x53EF;&#x81EA;&#x52A8;&#x6D88;&#x9664;)</span>
+<span class="hljs-keyword">import</span> os
+os.environ[<span class="hljs-string">&apos;TF_CPP_MIN_LOG_LEVEL&apos;</span>] = <span class="hljs-string">&apos;2&apos;</span>
+
+a = tf.constant(<span class="hljs-number">3.0</span>)
+b = tf.constant(<span class="hljs-number">4.0</span>)
+
+<span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> sess:
+    a_b = tf.add(a, b)
+    print(<span class="hljs-string">&quot;&#x76F8;&#x52A0;&#x540E;&#x7684;&#x7C7B;&#x578B;&#x4E3A;&quot;</span>)
+    print(a_b)
+    print(<span class="hljs-string">&quot;&#x771F;&#x6B63;&#x7684;&#x7ED3;&#x679C;&#x4E3A;:&quot;</span>)
+    print(sess.run(a_b))
+</code></pre>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-8623ba38fff3f1e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="tf_add"></p>
+</blockquote>
+<h1 id="&#x5C06;&#x52A0;&#x6CD5;&#x8FD0;&#x7B97;&#x4EE5;&#x56FE;&#x5F62;&#x5316;&#x65B9;&#x5F0F;&#x5C55;&#x793A;">&#x5C06;&#x52A0;&#x6CD5;&#x8FD0;&#x7B97;&#x4EE5;&#x56FE;&#x5F62;&#x5316;&#x65B9;&#x5F0F;&#x5C55;&#x793A;</h1>
+<ul>
+<li>&#x5728;&#x4F1A;&#x8BDD;&#x4E2D;&#x6DFB;&#x52A0;&#x8BB0;&#x5F55;&#x6587;&#x4EF6;&#x7684;&#x8BED;&#x53E5;
+```python
+import tensorflow as tf<h1 id="&#x6D88;&#x9664;&#x8B66;&#x544A;&#x4F7F;&#x7528;&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x53EF;&#x81EA;&#x52A8;&#x6D88;&#x9664;">&#x6D88;&#x9664;&#x8B66;&#x544A;(&#x4F7F;&#x7528;&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x53EF;&#x81EA;&#x52A8;&#x6D88;&#x9664;)</h1>
+import os
+os.environ[&apos;TF_CPP_MIN_LOG_LEVEL&apos;] = &apos;2&apos;</li>
+</ul>
+<p>a = tf.constant(3.0)
+b = tf.constant(4.0)</p>
+<p>with tf.Session() as sess:
+    a_b = tf.add(a, b)
+    print(&quot;&#x76F8;&#x52A0;&#x540E;&#x7684;&#x7C7B;&#x578B;&#x4E3A;&quot;)
+    print(a_b)
+    print(&quot;&#x771F;&#x6B63;&#x7684;&#x7ED3;&#x679C;&#x4E3A;:&quot;)
+    print(sess.run(a_b))</p>
+<pre><code># &#x6DFB;&#x52A0;board&#x8BB0;&#x5F55;&#x6587;&#x4EF6;
+file_write = tf.summary.FileWriter(&apos;/Users/lijianzhao/tensorBoard/&apos;, graph=sess.graph)
+</code></pre><pre><code>
+
+- &#x5728;&#x7EC8;&#x7AEF;&#x8FD0;&#x884C;`tensorboard --logdir=&quot;/Users/lijianzhao/tensorBoard/&quot;`
+
+&gt; ![&#x5728;&#x7EC8;&#x7AEF;&#x8FD0;&#x884C;tensorboard](http://upload-images.jianshu.io/upload_images/3203841-7f580de4bbd3557a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+- &#x6839;&#x636E;&#x7EC8;&#x7AEF;&#x63D0;&#x793A;,&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x952E;&#x5165;`http://192.168.199.213:6006`
+
+&gt;![tensorboard&#x4E3B;&#x754C;&#x9762;](http://upload-images.jianshu.io/upload_images/3203841-60948a962d46fe3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+- &#x9009;&#x62E9;GRAPHS
+&gt;![&#x9009;&#x62E9;GRAPHS](http://upload-images.jianshu.io/upload_images/3203841-6d90eb835a11e64b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+# &#x5B9E;&#x73B0;&#x7B80;&#x5355;&#x7684;&#x7EBF;&#x6027;&#x56DE;&#x5F52;
+```python
+import tensorflow as tf
+# &#x6D88;&#x9664;&#x8B66;&#x544A;(&#x4F7F;&#x7528;&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x53EF;&#x81EA;&#x52A8;&#x6D88;&#x9664;)
+import os
+os.environ[&apos;TF_CPP_MIN_LOG_LEVEL&apos;] = &apos;2&apos;
+
+# &#x56DE;&#x5F52;&#x51FD;&#x6570;
+def my_regression():
+
+    # &#x51C6;&#x5907;10000 &#x6761;&#x6570;&#x636E;x&#x7684;&#x5E73;&#x5747;&#x503C;&#x4E3A;5.0 &#x6807;&#x51C6;&#x5DEE;&#x4E3A;1.0
+    x = tf.random_normal([100, 1], mean = 5.0, stddev=1.0, name=&quot;x&quot;)
+    # &#x771F;&#x5B9E;&#x7684;&#x5173;&#x7CFB;&#x4E3A; y = 0.7x + 0.6
+    y_true = tf.matmul(x, [[0.7]]) + 0.6
+
+    # &#x521B;&#x5EFA;&#x6743;&#x91CD;&#x53D8;&#x91CF;
+    weight = tf.Variable(tf.random_normal([1, 1], mean=1.0, stddev=0.1), name=&quot;weight&quot;)
+
+    # &#x521B;&#x5EFA;&#x504F;&#x7F6E;&#x53D8;&#x91CF;,&#x521D;&#x59CB;&#x503C;&#x4E3A;1
+    bias = tf.Variable(1.0, name=&quot;bias&quot;)
+
+    # &#x9884;&#x6D4B;&#x7ED3;&#x679C;
+    y_predict = tf.matmul(x, weight) + bias
+
+    # &#x8BA1;&#x7B97;&#x635F;&#x5931;
+    loss = tf.reduce_mean(tf.square(y_predict - y_true))
+
+    # &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x51CF;&#x5C11;&#x635F;&#x5931;,&#x6BCF;&#x6B21;&#x7684;&#x5B66;&#x4E60;&#x7387;&#x4E3A;0.1
+    train_op = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
+
+    # &#x6536;&#x96C6;&#x53D8;&#x91CF;
+    tf.summary.scalar(&quot;losses&quot;, loss)
+    tf.summary.histogram(&quot;weightes&quot;, weight)
+
+    # &#x5408;&#x5E76;&#x53D8;&#x91CF;
+    merged = tf.summary.merge_all()
+
+    # &#x521D;&#x59CB;&#x5316;&#x53D8;&#x91CF;
+    init_op = tf.global_variables_initializer()
+
+    # &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x4F18;&#x5316;&#x635F;&#x5931;
+    with tf.Session() as sess:
+        sess.run(init_op)
+
+        print(&quot;&#x521D;&#x59CB;&#x7684;&#x6743;&#x91CD;&#x4E3A;{}, &#x521D;&#x59CB;&#x7684;&#x504F;&#x7F6E;&#x4E3A;{}&quot;.format(weight.eval(), bias.eval()))
+
+        # &#x6DFB;&#x52A0;board&#x8BB0;&#x5F55;&#x6587;&#x4EF6;
+        file_write = tf.summary.FileWriter(&apos;/Users/lijianzhao/tensorBoard/my_regression&apos;, graph=sess.graph)
+
+
+        # &#x5FAA;&#x73AF;&#x8BAD;&#x7EC3;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x6A21;&#x578B;
+        for i in range(20000):
+            sess.run(train_op)
+            print(&quot;&#x8BAD;&#x7EC3;&#x7B2C;{}&#x6B21;&#x7684;&#x6743;&#x91CD;&#x4E3A;{}, &#x504F;&#x7F6E;&#x4E3A;{}&quot;.format(i,weight.eval(), bias.eval()))
+
+            # &#x89C2;&#x5BDF;&#x6BCF;&#x6B21;&#x503C;&#x7684;&#x53D8;&#x5316;
+            # &#x8FD0;&#x884C;merge
+            summery = sess.run(merged)
+            # &#x6BCF;&#x6B21;&#x6536;&#x96C6;&#x5230;&#x7684;&#x503C;&#x6DFB;&#x52A0;&#x5230;&#x6587;&#x4EF6;&#x4E2D;
+            file_write.add_summary(summery, i)
+
+
+if __name__ == &apos;__main__&apos;:
+    my_regression()
+</code></pre><blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-8d0fa7431af61aa0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8FD0;&#x884C;&#x7ED3;&#x679C;">
+<img src="http://upload-images.jianshu.io/upload_images/3203841-749900c1bb0b72fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x7A0B;&#x5E8F;&#x6D41;&#x7A0B;&#x56FE;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-0df2de6f8c687ae3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x635F;&#x5931;&#x503C;&#x964D;&#x4F4E;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-437461fa51faf696.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6743;&#x91CD;&#x9010;&#x6E10;&#x63A5;&#x8FD1;&#x771F;&#x5B9E;&#x503C;"></p>
+</blockquote>
+<h1 id="&#x4E3A;&#x7A0B;&#x5E8F;&#x6DFB;&#x52A0;&#x4F5C;&#x7528;&#x57DF;">&#x4E3A;&#x7A0B;&#x5E8F;&#x6DFB;&#x52A0;&#x4F5C;&#x7528;&#x57DF;</h1>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
+<span class="hljs-comment"># &#x6D88;&#x9664;&#x8B66;&#x544A;(&#x4F7F;&#x7528;&#x6E90;&#x7801;&#x5B89;&#x88C5;&#x53EF;&#x81EA;&#x52A8;&#x6D88;&#x9664;)</span>
+<span class="hljs-keyword">import</span> os
+os.environ[<span class="hljs-string">&apos;TF_CPP_MIN_LOG_LEVEL&apos;</span>] = <span class="hljs-string">&apos;2&apos;</span>
+
+<span class="hljs-comment"># &#x56DE;&#x5F52;&#x51FD;&#x6570;</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_regression</span><span class="hljs-params">()</span>:</span>
+
+    <span class="hljs-comment"># &#x51C6;&#x5907;&#x6570;&#x636E;</span>
+    <span class="hljs-keyword">with</span> tf.variable_scope(<span class="hljs-string">&quot;data&quot;</span>):
+        <span class="hljs-comment"># &#x51C6;&#x5907;10000 &#x6761;&#x6570;&#x636E;x&#x7684;&#x5E73;&#x5747;&#x503C;&#x4E3A;5.0 &#x6807;&#x51C6;&#x5DEE;&#x4E3A;1.0</span>
+        x = tf.random_normal([<span class="hljs-number">100</span>, <span class="hljs-number">1</span>], mean = <span class="hljs-number">5.0</span>, stddev=<span class="hljs-number">1.0</span>, name=<span class="hljs-string">&quot;x&quot;</span>)
+        <span class="hljs-comment"># &#x771F;&#x5B9E;&#x7684;&#x5173;&#x7CFB;&#x4E3A; y = 0.7x + 0.6</span>
+        y_true = tf.matmul(x, [[<span class="hljs-number">0.7</span>]]) + <span class="hljs-number">0.6</span>
+
+    <span class="hljs-comment"># &#x521B;&#x5EFA;&#x6A21;&#x578B;</span>
+    <span class="hljs-keyword">with</span> tf.variable_scope (<span class="hljs-string">&quot;model&quot;</span>):
+        <span class="hljs-comment"># &#x521B;&#x5EFA;&#x6743;&#x91CD;&#x53D8;&#x91CF;</span>
+        weight = tf.Variable(tf.random_normal([<span class="hljs-number">1</span>, <span class="hljs-number">1</span>], mean=<span class="hljs-number">1.0</span>, stddev=<span class="hljs-number">0.1</span>), name=<span class="hljs-string">&quot;weight&quot;</span>)
+
+        <span class="hljs-comment"># &#x521B;&#x5EFA;&#x504F;&#x7F6E;&#x53D8;&#x91CF;,&#x521D;&#x59CB;&#x503C;&#x4E3A;1</span>
+        bias = tf.Variable(<span class="hljs-number">1.0</span>, name=<span class="hljs-string">&quot;bias&quot;</span>)
+
+        <span class="hljs-comment"># &#x9884;&#x6D4B;&#x7ED3;&#x679C;</span>
+        y_predict = tf.matmul(x, weight) + bias
+
+    <span class="hljs-comment"># &#x8BA1;&#x7B97;&#x635F;&#x5931;</span>
+    <span class="hljs-keyword">with</span> tf.variable_scope (<span class="hljs-string">&quot;loss&quot;</span>):
+        <span class="hljs-comment"># &#x8BA1;&#x7B97;&#x635F;&#x5931;</span>
+        loss = tf.reduce_mean(tf.square(y_predict - y_true))
+
+    <span class="hljs-comment"># &#x51CF;&#x5C11;&#x635F;&#x5931;</span>
+    <span class="hljs-keyword">with</span> tf.variable_scope(<span class="hljs-string">&quot;optimizer&quot;</span>):
+        <span class="hljs-comment"># &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x51CF;&#x5C11;&#x635F;&#x5931;,&#x6BCF;&#x6B21;&#x7684;&#x5B66;&#x4E60;&#x7387;&#x4E3A;0.1</span>
+        train_op = tf.train.GradientDescentOptimizer(<span class="hljs-number">0.01</span>).minimize(loss)
+
+    <span class="hljs-comment"># &#x6536;&#x96C6;&#x53D8;&#x91CF;</span>
+    tf.summary.scalar(<span class="hljs-string">&quot;losses&quot;</span>, loss)
+    tf.summary.histogram(<span class="hljs-string">&quot;weightes&quot;</span>, weight)
+
+    <span class="hljs-comment"># &#x5408;&#x5E76;&#x53D8;&#x91CF;</span>
+    merged = tf.summary.merge_all()
+
+    <span class="hljs-comment"># &#x521D;&#x59CB;&#x5316;&#x53D8;&#x91CF;</span>
+    init_op = tf.global_variables_initializer()
+
+    <span class="hljs-comment"># &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x4F18;&#x5316;&#x635F;&#x5931;</span>
+    <span class="hljs-keyword">with</span> tf.Session() <span class="hljs-keyword">as</span> sess:
+        sess.run(init_op)
+        print(<span class="hljs-string">&quot;&#x521D;&#x59CB;&#x7684;&#x6743;&#x91CD;&#x4E3A;{}, &#x521D;&#x59CB;&#x7684;&#x504F;&#x7F6E;&#x4E3A;{}&quot;</span>.format(weight.eval(), bias.eval()))
+        <span class="hljs-comment"># &#x6DFB;&#x52A0;board&#x8BB0;&#x5F55;&#x6587;&#x4EF6;</span>
+        file_write = tf.summary.FileWriter(<span class="hljs-string">&apos;/Users/lijianzhao/tensorBoard/my_regression&apos;</span>, graph=sess.graph)
+        <span class="hljs-comment"># &#x5FAA;&#x73AF;&#x8BAD;&#x7EC3;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x6A21;&#x578B;</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">20000</span>):
+            sess.run(train_op)
+            print(<span class="hljs-string">&quot;&#x8BAD;&#x7EC3;&#x7B2C;{}&#x6B21;&#x7684;&#x6743;&#x91CD;&#x4E3A;{}, &#x504F;&#x7F6E;&#x4E3A;{}&quot;</span>.format(i,weight.eval(), bias.eval()))
+            <span class="hljs-comment"># &#x89C2;&#x5BDF;&#x6BCF;&#x6B21;&#x503C;&#x7684;&#x53D8;&#x5316;</span>
+            <span class="hljs-comment"># &#x8FD0;&#x884C;merge</span>
+            summery = sess.run(merged)
+            <span class="hljs-comment"># &#x6BCF;&#x6B21;&#x6536;&#x96C6;&#x5230;&#x7684;&#x503C;&#x6DFB;&#x52A0;&#x5230;&#x6587;&#x4EF6;&#x4E2D;</span>
+            file_write.add_summary(summery, i)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    my_regression()
+</code></pre>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-8100ebba4bdc0b98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6DFB;&#x52A0;&#x4F5C;&#x7528;&#x57DF;"></p>
+</blockquote>
+<h1 id="&#x6A21;&#x578B;&#x7684;&#x4FDD;&#x5B58;&#x4E0E;&#x6062;&#x590D;&#x4FDD;&#x5B58;&#x4F1A;&#x8BDD;&#x8D44;&#x6E90;">&#x6A21;&#x578B;&#x7684;&#x4FDD;&#x5B58;&#x4E0E;&#x6062;&#x590D;(&#x4FDD;&#x5B58;&#x4F1A;&#x8BDD;&#x8D44;&#x6E90;)</h1>
+<ul>
+<li>&#x521B;&#x5EFA;&#x4FDD;&#x5B58;&#x6A21;&#x578B;&#x7684;saver<pre><code class="lang-python">saver = tf.train.Saver()
+</code></pre>
+</li>
+<li>&#x4FDD;&#x5B58;&#x6A21;&#x578B;<pre><code class="lang-python">saver.save(sess, <span class="hljs-string">&quot;./tmp/ckpt/test&quot;</span>)
+</code></pre>
+</li>
+<li>&#x6062;&#x590D;&#x6A21;&#x578B;<pre><code class="lang-python">save.restore(sess, <span class="hljs-string">&quot;./tmp/ckpt/test&quot;</span>)
+</code></pre>
+</li>
+</ul>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="NaiveBayesNews.html" class="navigation navigation-prev " aria-label="上一页: 朴素贝叶斯完成新闻分类">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="knnPrediction.html" class="navigation navigation-next " aria-label="下一页: K近邻(knn)算法预测电影类型">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Tensorflow可视化编程","level":"1.5.3","depth":2,"next":{"title":"K近邻(knn)算法预测电影类型","level":"1.5.4","depth":2,"path":"knnPrediction.md","ref":"knnPrediction.md","articles":[]},"previous":{"title":"朴素贝叶斯完成新闻分类","level":"1.5.2","depth":2,"path":"NaiveBayesNews.md","ref":"NaiveBayesNews.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"TensorflowView.md","mtime":"2020-10-18T14:18:00.131Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+

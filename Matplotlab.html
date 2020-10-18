@@ -1,0 +1,821 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>机器学习三剑客之Matplotlab - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    <link rel="next" href="Numpy.html" />
+    <link rel="prev" href="knnPrediction.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >机器学习三剑客之Matplotlab</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p> <img src="http://upload-images.jianshu.io/upload_images/3203841-e0327b04b904a004.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="matplotlib">
+<strong>Matplotlib &#x662F;Python 2D&#x7ED8;&#x56FE;&#x9886;&#x57DF;&#x7684;&#x57FA;&#x7840;&#x5957;&#x4EF6;&#xFF0C;&#x5B83;&#x8BA9;&#x4F7F;&#x7528;&#x8005;&#x5C06;&#x6570;&#x636E;&#x56FE;&#x5F62;&#x5316;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x591A;&#x6837;&#x5316;&#x7684;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x3002;&#x8FD9;&#x91CC;&#x5C06;&#x4F1A;&#x4EE5;&#x56DB;&#x4E2A;&#x5C0F;&#x6848;&#x4F8B;&#x63A2;&#x7D22;Matplotlib&#x7684;&#x5E38;&#x89C1;&#x7528;&#x6CD5;</strong></p>
+<h2 id="&#x7ED8;&#x5236;&#x6298;&#x7EBF;&#x56FE;">&#x7ED8;&#x5236;&#x6298;&#x7EBF;&#x56FE;</h2>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-f0f9e4fc04515b7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6298;&#x7EBF;&#x56FE;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> random
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x751F;&#x6210;&#x7684;&#x56FE;&#x7247;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x663E;&#x793A;</span>
+%matplotlib inline
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x80FD;&#x6B63;&#x5E38;&#x663E;&#x793A;&#x4E2D;&#x6587;(Mac)</span>
+plt.rcParams[<span class="hljs-string">&apos;font.family&apos;</span>] = [<span class="hljs-string">&apos;Arial Unicode MS&apos;</span>]
+
+<span class="hljs-comment"># &#x6A21;&#x62DF;&#x6D77;&#x5357;&#x4E00;&#x5929;&#x7684;&#x6E29;&#x5EA6;&#x53D8;&#x5316;</span>
+
+<span class="hljs-comment"># &#x751F;&#x6210;x&#x8F74;&#x7684;24&#x5C0F;&#x65F6;</span>
+hainan_x = [h <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>)]
+
+<span class="hljs-comment"># &#x751F;&#x6210;y&#x8F74;&#x7684;&#x6E29;&#x5EA6;&#x968F;&#x673A;&#x503C;(15, 25)</span>
+hainan_y = [random.randint(<span class="hljs-number">15</span>, <span class="hljs-number">25</span>) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>)]
+
+<span class="hljs-comment"># &#x8BBE;&#x7F6E;&#x753B;&#x677F;&#x5C5E;&#x6027;</span>
+plt.figure(figsize = (<span class="hljs-number">10</span>, <span class="hljs-number">8</span>), dpi = <span class="hljs-number">100</span>)
+
+<span class="hljs-comment"># &#x5F80;&#x753B;&#x677F;&#x7ED8;&#x56FE;</span>
+plt.plot(hainan_x, hainan_y, label=<span class="hljs-string">&quot;&#x6D77;&#x5357;&quot;</span>)
+
+<span class="hljs-comment"># &#x6A21;&#x62DF;&#x5317;&#x4EAC;&#x4E00;&#x5929;&#x5185;&#x6E29;&#x5EA6;&#x7684;&#x53D8;&#x5316;</span>
+
+<span class="hljs-comment"># &#x751F;&#x6210;x&#x8F74;&#x7684;24&#x5C0F;&#x65F6;</span>
+beijing_x = [h <span class="hljs-keyword">for</span> h <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>)]
+
+<span class="hljs-comment"># &#x751F;&#x6210;y&#x8F74;&#x7684;&#x6E29;&#x5EA6;&#x968F;&#x673A;&#x503C;(5, 10)</span>
+beijing_y = [random.randint(<span class="hljs-number">5</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>)]
+
+<span class="hljs-comment"># &#x5F80;&#x753B;&#x677F;&#x7ED8;&#x56FE;</span>
+plt.plot(beijing_x, beijing_y, label=<span class="hljs-string">&quot;&#x5317;&#x4EAC;&quot;</span>)
+
+
+<span class="hljs-comment"># &#x6A21;&#x62DF;&#x6CB3;&#x5317;&#x4E00;&#x5929;&#x5185;&#x6E29;&#x5EA6;&#x7684;&#x53D8;&#x5316;</span>
+hebei_x = beijing_x
+hebei_y = [random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>) <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>)]
+<span class="hljs-comment"># &#x81EA;&#x5B9A;&#x4E49;&#x7ED8;&#x5236;&#x5C5E;&#x6027;: &#x989C;&#x8272;color=&quot;#0c8ac5&quot;, linestyle&quot;-&quot;&quot;&quot;--&quot;&quot;-.&quot;:&quot;, &#x7EBF;&#x5BBD;linewidth, &#x900F;&#x660E;&#x5EA6;alpha</span>
+plt.plot(hebei_x, hebei_y, label=<span class="hljs-string">&quot;&#x6CB3;&#x5317;&quot;</span>,color=<span class="hljs-string">&quot;#823384&quot;</span>, linestyle=<span class="hljs-string">&quot;:&quot;</span>, linewidth=<span class="hljs-number">3</span>, alpha=<span class="hljs-number">0.3</span>)
+
+
+<span class="hljs-comment"># &#x5750;&#x6807;&#x8F74;&#x663E;&#x793A;&#x8BBE;&#x7F6E;</span>
+
+
+
+<span class="hljs-comment"># &#x751F;&#x6210;24&#x5C0F;&#x65F6;&#x7684;&#x63CF;&#x8FF0;</span>
+x_ = [x_ <span class="hljs-keyword">for</span> x_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>)]
+x_desc = [<span class="hljs-string">&quot;{}&#x65F6;&quot;</span>.format(x_desc) <span class="hljs-keyword">for</span> x_desc <span class="hljs-keyword">in</span> x_]
+
+<span class="hljs-comment"># &#x8BBE;&#x7F6E;x&#x8F74;&#x663E;&#x793A; 24&#x5C0F;&#x65F6;</span>
+plt.xticks(x_, x_desc)
+
+<span class="hljs-comment"># &#x751F;&#x6210;10&#x81F3;30&#x5EA6;&#x7684;&#x63CF;&#x8FF0;</span>
+y_ = [y_ <span class="hljs-keyword">for</span> y_ <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">30</span>)][::<span class="hljs-number">2</span>]
+y_desc = [<span class="hljs-string">&quot;{}&#x2103;&quot;</span>.format(y_desc) <span class="hljs-keyword">for</span> y_desc <span class="hljs-keyword">in</span> y_]
+
+
+<span class="hljs-comment"># &#x8BBE;&#x7F6E;y&#x8F74;&#x663E;&#x793A;&#x6E29;&#x5EA6;&#x63CF;&#x8FF0;</span>
+plt.yticks(y_, y_desc)
+
+<span class="hljs-comment"># &#x6307;&#x5B9A;x y&#x8F74;&#x7684;&#x540D;&#x79F0;</span>
+plt.xlabel(<span class="hljs-string">&quot;&#x65F6;&#x95F4;&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;&#x6E29;&#x5EA6;&quot;</span>)
+
+<span class="hljs-comment"># &#x6307;&#x5B9A;&#x6807;&#x9898;</span>
+plt.title(<span class="hljs-string">&quot;&#x4E00;&#x5929;&#x5185;&#x6E29;&#x5EA6;&#x7684;&#x53D8;&#x5316;&quot;</span>)
+
+<span class="hljs-comment"># &#x663E;&#x793A;&#x56FE;&#x4F8B;</span>
+plt.legend(loc=<span class="hljs-string">&quot;best&quot;</span>)
+
+<span class="hljs-comment"># &#x5C06;&#x6570;&#x636E;&#x751F;&#x6210;&#x56FE;&#x7247;, &#x4FDD;&#x5B58;&#x5230;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;</span>
+plt.savefig(<span class="hljs-string">&quot;./t.png&quot;</span>)
+<span class="hljs-comment"># &#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x5C55;&#x793A;&#x56FE;&#x7247;</span>
+plt.show()
+</code></pre>
+<h1 id="&#x7ED8;&#x5236;&#x6761;&#x5F62;&#x56FE;">&#x7ED8;&#x5236;&#x6761;&#x5F62;&#x56FE;</h1>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-8f583073133a334e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;&#x4E3B;&#x8981;&#x4EBA;&#x7269;&#x5E74;&#x9F84;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> random
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x751F;&#x6210;&#x7684;&#x56FE;&#x7247;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5185;&#x663E;&#x793A;</span>
+%matplotlib inline
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x80FD;&#x6B63;&#x5E38;&#x663E;&#x793A;&#x4E2D;&#x6587;(Mac)</span>
+plt.rcParams[<span class="hljs-string">&apos;font.family&apos;</span>] = [<span class="hljs-string">&apos;Arial Unicode MS&apos;</span>]
+
+<span class="hljs-comment"># &#x6761;&#x5F62;&#x56FE;&#x7ED8;&#x5236;&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;&#x4E3B;&#x8981;&#x89D2;&#x8272;&#x5E74;&#x9F84;</span>
+role_list = [<span class="hljs-string">&quot;&#x67EF;&#x5357;&quot;</span>, <span class="hljs-string">&quot;&#x6BDB;&#x5229;&#x5170;&quot;</span>, <span class="hljs-string">&quot;&#x7070;&#x539F;&#x54C0;&quot;</span>, <span class="hljs-string">&quot;&#x7434;&#x9152;&quot;</span>,<span class="hljs-string">&quot;&#x8D1D;&#x5C14;&#x6469;&#x5FB7;&quot;</span>, <span class="hljs-string">&quot;&#x4F0F;&#x7279;&#x52A0;&quot;</span>, <span class="hljs-string">&quot;&#x8D64;&#x4E95;&#x79C0;&#x4E00;&quot;</span>, <span class="hljs-string">&quot;&#x76EE;&#x66AE;&#x5341;&#x4E09;&quot;</span>]
+role_age = [<span class="hljs-number">7</span>, <span class="hljs-number">17</span>, <span class="hljs-number">7</span>, <span class="hljs-number">34</span>, <span class="hljs-number">32</span>, <span class="hljs-number">30</span>, <span class="hljs-number">27</span>, <span class="hljs-number">46</span>]
+<span class="hljs-comment"># &#x5B9E;&#x9645;&#x5E74;&#x9F84;</span>
+role_ture_age = [<span class="hljs-number">18</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">34</span>, <span class="hljs-number">45</span>, <span class="hljs-number">30</span>, <span class="hljs-number">27</span>, <span class="hljs-number">46</span>]
+
+x = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, len(role_list)+<span class="hljs-number">1</span>)]
+
+y = role_age
+y2 =role_ture_age
+
+<span class="hljs-comment"># &#x8BBE;&#x7F6E;&#x753B;&#x677F;&#x5C5E;&#x6027;</span>
+plt.figure(figsize = (<span class="hljs-number">15</span>, <span class="hljs-number">8</span>), dpi = <span class="hljs-number">100</span>)
+
+<span class="hljs-comment"># width&#x4EE5;x&#x4E3A;&#x57FA;&#x51C6;,&#x5411;&#x53F3;&#x4E3A;&#x6B63;,&#x5411;&#x5DE6;&#x4E3A;&#x8D1F;(&#x5982;&#x679C;&#x591A;&#x4E86;,&#x5C31;&#x9700;&#x8981;&#x4E3A;&#x57FA;&#x51C6;x&#x52A0;&#x51CF;&#x54CD;&#x5E94;&#x7684;&#x6570;&#x503C;)</span>
+plt.bar(x, y, width= <span class="hljs-number">-0.3</span>, label=<span class="hljs-string">&quot;&#x73B0;&#x5B9E;&#x5E74;&#x9F84;&quot;</span>, color=<span class="hljs-string">&quot;#509839&quot;</span>)
+plt.bar(x, y2, width = <span class="hljs-number">0.3</span>, label=<span class="hljs-string">&quot;&#x5B9E;&#x9645;&#x5E74;&#x9F84;&quot;</span>, color=<span class="hljs-string">&quot;#c03035&quot;</span>)
+
+x_ = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, len(role_list)+<span class="hljs-number">1</span>)]
+x_desc = [<span class="hljs-string">&quot;{}&quot;</span>.format(x_desc) <span class="hljs-keyword">for</span> x_desc <span class="hljs-keyword">in</span> role_list]
+x_desc.insert(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&quot;</span>)
+
+y_ = range(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>)[::<span class="hljs-number">5</span>]
+y_desc = [<span class="hljs-string">&quot;{}&#x5C81;&quot;</span>.format(y_desc) <span class="hljs-keyword">for</span> y_desc <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>)][::<span class="hljs-number">5</span>]
+
+<span class="hljs-comment"># x&#x8F74;&#x7684;&#x6570;&#x503C;&#x548C;&#x63CF;&#x8FF0;</span>
+plt.xticks(x_, x_desc)
+plt.yticks(y_, y_desc)
+
+plt.xlabel(<span class="hljs-string">&quot;&#x89D2;&#x8272;&#x59D3;&#x540D;&quot;</span>)
+plt.ylabel(<span class="hljs-string">&quot;&#x5E74;&#x9F84;&quot;</span>)
+plt.title(<span class="hljs-string">&quot;&#x540D;&#x4FA6;&#x63A2;&#x67EF;&#x5357;&#x4E3B;&#x8981;&#x89D2;&#x8272;&#x5E74;&#x9F84;(&#x90E8;&#x5206;)&quot;</span>)
+plt.legend(loc=<span class="hljs-string">&quot;best&quot;</span>)
+plt.savefig(<span class="hljs-string">&quot;./mzt.png&quot;</span>)
+plt.show()
+</code></pre>
+<h1 id="&#x76F4;&#x65B9;&#x56FE;">&#x76F4;&#x65B9;&#x56FE;</h1>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-89ae5b2a29c19461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMDB"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x80FD;&#x6B63;&#x5E38;&#x663E;&#x793A;&#x4E2D;&#x6587;</span>
+plt.rcParams[<span class="hljs-string">&apos;font.family&apos;</span>] = [<span class="hljs-string">&apos;Arial Unicode MS&apos;</span>]
+
+<span class="hljs-comment"># &#x65F6;&#x957F;&#x6570;&#x636E;</span>
+time = [<span class="hljs-number">131</span>,  <span class="hljs-number">98</span>, <span class="hljs-number">125</span>, <span class="hljs-number">131</span>, <span class="hljs-number">124</span>, <span class="hljs-number">139</span>, <span class="hljs-number">131</span>, <span class="hljs-number">117</span>, <span class="hljs-number">128</span>, <span class="hljs-number">108</span>, <span class="hljs-number">135</span>, <span class="hljs-number">138</span>, <span class="hljs-number">131</span>, <span class="hljs-number">102</span>, <span class="hljs-number">107</span>, <span class="hljs-number">114</span>, <span class="hljs-number">119</span>, <span class="hljs-number">128</span>, <span class="hljs-number">121</span>, <span class="hljs-number">142</span>, <span class="hljs-number">127</span>, <span class="hljs-number">130</span>, <span class="hljs-number">124</span>, <span class="hljs-number">101</span>, <span class="hljs-number">110</span>, <span class="hljs-number">116</span>, <span class="hljs-number">117</span>, <span class="hljs-number">110</span>, <span class="hljs-number">128</span>, <span class="hljs-number">128</span>, <span class="hljs-number">115</span>,  <span class="hljs-number">99</span>, <span class="hljs-number">136</span>, <span class="hljs-number">126</span>, <span class="hljs-number">134</span>,  <span class="hljs-number">95</span>, <span class="hljs-number">138</span>, <span class="hljs-number">117</span>, <span class="hljs-number">111</span>,<span class="hljs-number">78</span>, <span class="hljs-number">132</span>, <span class="hljs-number">124</span>, <span class="hljs-number">113</span>, <span class="hljs-number">150</span>, <span class="hljs-number">110</span>, <span class="hljs-number">117</span>,  <span class="hljs-number">86</span>,  <span class="hljs-number">95</span>, <span class="hljs-number">144</span>, <span class="hljs-number">105</span>, <span class="hljs-number">126</span>, <span class="hljs-number">130</span>,<span class="hljs-number">126</span>, <span class="hljs-number">130</span>, <span class="hljs-number">126</span>, <span class="hljs-number">116</span>, <span class="hljs-number">123</span>, <span class="hljs-number">106</span>, <span class="hljs-number">112</span>, <span class="hljs-number">138</span>, <span class="hljs-number">123</span>,  <span class="hljs-number">86</span>, <span class="hljs-number">101</span>,  <span class="hljs-number">99</span>, <span class="hljs-number">136</span>,<span class="hljs-number">123</span>, <span class="hljs-number">117</span>, <span class="hljs-number">119</span>, <span class="hljs-number">105</span>, <span class="hljs-number">137</span>, <span class="hljs-number">123</span>, <span class="hljs-number">128</span>, <span class="hljs-number">125</span>, <span class="hljs-number">104</span>, <span class="hljs-number">109</span>, <span class="hljs-number">134</span>, <span class="hljs-number">125</span>, <span class="hljs-number">127</span>,<span class="hljs-number">105</span>, <span class="hljs-number">120</span>, <span class="hljs-number">107</span>, <span class="hljs-number">129</span>, <span class="hljs-number">116</span>, <span class="hljs-number">108</span>, <span class="hljs-number">132</span>, <span class="hljs-number">103</span>, <span class="hljs-number">136</span>, <span class="hljs-number">118</span>, <span class="hljs-number">102</span>, <span class="hljs-number">120</span>, <span class="hljs-number">114</span>,<span class="hljs-number">105</span>, <span class="hljs-number">115</span>, <span class="hljs-number">132</span>, <span class="hljs-number">145</span>, <span class="hljs-number">119</span>, <span class="hljs-number">121</span>, <span class="hljs-number">112</span>, <span class="hljs-number">139</span>, <span class="hljs-number">125</span>, <span class="hljs-number">138</span>, <span class="hljs-number">109</span>, <span class="hljs-number">132</span>, <span class="hljs-number">134</span>,<span class="hljs-number">156</span>, <span class="hljs-number">106</span>, <span class="hljs-number">117</span>, <span class="hljs-number">127</span>, <span class="hljs-number">144</span>, <span class="hljs-number">139</span>, <span class="hljs-number">139</span>, <span class="hljs-number">119</span>, <span class="hljs-number">140</span>,  <span class="hljs-number">83</span>, <span class="hljs-number">110</span>, <span class="hljs-number">102</span>,<span class="hljs-number">123</span>,<span class="hljs-number">107</span>, <span class="hljs-number">143</span>, <span class="hljs-number">115</span>, <span class="hljs-number">136</span>, <span class="hljs-number">118</span>, <span class="hljs-number">139</span>, <span class="hljs-number">123</span>, <span class="hljs-number">112</span>, <span class="hljs-number">118</span>, <span class="hljs-number">125</span>, <span class="hljs-number">109</span>, <span class="hljs-number">119</span>, <span class="hljs-number">133</span>,<span class="hljs-number">112</span>, <span class="hljs-number">114</span>, <span class="hljs-number">122</span>, <span class="hljs-number">109</span>, <span class="hljs-number">106</span>, <span class="hljs-number">123</span>, <span class="hljs-number">116</span>, <span class="hljs-number">131</span>, <span class="hljs-number">127</span>, <span class="hljs-number">115</span>, <span class="hljs-number">118</span>, <span class="hljs-number">112</span>, <span class="hljs-number">135</span>,<span class="hljs-number">115</span>, <span class="hljs-number">146</span>, <span class="hljs-number">137</span>, <span class="hljs-number">116</span>, <span class="hljs-number">103</span>, <span class="hljs-number">144</span>,  <span class="hljs-number">83</span>, <span class="hljs-number">123</span>, <span class="hljs-number">111</span>, <span class="hljs-number">110</span>, <span class="hljs-number">111</span>, <span class="hljs-number">100</span>, <span class="hljs-number">154</span>,<span class="hljs-number">136</span>, <span class="hljs-number">100</span>, <span class="hljs-number">118</span>, <span class="hljs-number">119</span>, <span class="hljs-number">133</span>, <span class="hljs-number">134</span>, <span class="hljs-number">106</span>, <span class="hljs-number">129</span>, <span class="hljs-number">126</span>, <span class="hljs-number">110</span>, <span class="hljs-number">111</span>, <span class="hljs-number">109</span>, <span class="hljs-number">141</span>,<span class="hljs-number">120</span>, <span class="hljs-number">117</span>, <span class="hljs-number">106</span>, <span class="hljs-number">149</span>, <span class="hljs-number">122</span>, <span class="hljs-number">122</span>, <span class="hljs-number">110</span>, <span class="hljs-number">118</span>, <span class="hljs-number">127</span>, <span class="hljs-number">121</span>, <span class="hljs-number">114</span>, <span class="hljs-number">125</span>, <span class="hljs-number">126</span>,<span class="hljs-number">114</span>, <span class="hljs-number">140</span>, <span class="hljs-number">103</span>, <span class="hljs-number">130</span>, <span class="hljs-number">141</span>, <span class="hljs-number">117</span>, <span class="hljs-number">106</span>, <span class="hljs-number">114</span>, <span class="hljs-number">121</span>, <span class="hljs-number">114</span>, <span class="hljs-number">133</span>, <span class="hljs-number">137</span>,  <span class="hljs-number">92</span>,<span class="hljs-number">121</span>, <span class="hljs-number">112</span>, <span class="hljs-number">146</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">137</span>, <span class="hljs-number">105</span>,  <span class="hljs-number">98</span>, <span class="hljs-number">117</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">81</span>,  <span class="hljs-number">97</span>, <span class="hljs-number">139</span>, <span class="hljs-number">113</span>,<span class="hljs-number">134</span>, <span class="hljs-number">106</span>, <span class="hljs-number">144</span>, <span class="hljs-number">110</span>, <span class="hljs-number">137</span>, <span class="hljs-number">137</span>, <span class="hljs-number">111</span>, <span class="hljs-number">104</span>, <span class="hljs-number">117</span>, <span class="hljs-number">100</span>, <span class="hljs-number">111</span>, <span class="hljs-number">101</span>, <span class="hljs-number">110</span>,<span class="hljs-number">105</span>, <span class="hljs-number">129</span>, <span class="hljs-number">137</span>, <span class="hljs-number">112</span>, <span class="hljs-number">120</span>, <span class="hljs-number">113</span>, <span class="hljs-number">133</span>, <span class="hljs-number">112</span>,  <span class="hljs-number">83</span>,  <span class="hljs-number">94</span>, <span class="hljs-number">146</span>, <span class="hljs-number">133</span>, <span class="hljs-number">101</span>,<span class="hljs-number">131</span>, <span class="hljs-number">116</span>, <span class="hljs-number">111</span>,  <span class="hljs-number">84</span>, <span class="hljs-number">137</span>, <span class="hljs-number">115</span>, <span class="hljs-number">122</span>, <span class="hljs-number">106</span>, <span class="hljs-number">144</span>, <span class="hljs-number">109</span>, <span class="hljs-number">123</span>, <span class="hljs-number">116</span>, <span class="hljs-number">111</span>,<span class="hljs-number">111</span>, <span class="hljs-number">133</span>, <span class="hljs-number">150</span>]
+max_time = max(time)
+min_time = min(time)
+<span class="hljs-comment"># &#x6307;&#x5B9A;&#x5206;&#x7EC4;&#x5BBD;&#x5EA6;</span>
+width = <span class="hljs-number">5</span>
+<span class="hljs-comment"># &#x6307;&#x5B9A;&#x5206;&#x7EC4;&#x6570;&#x91CF;</span>
+num_bins = int((max_time - min_time)/<span class="hljs-number">2</span>)
+<span class="hljs-comment"># &#x76F4;&#x65B9;&#x56FE;&#x7EDF;&#x8BA1;&#x7535;&#x5F71;&#x65F6;&#x957F;&#x9891;&#x6570;</span>
+plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">8</span>), dpi=<span class="hljs-number">80</span>)
+
+<span class="hljs-comment"># &#x7ED8;&#x5236;&#x76F4;&#x65B9;&#x56FE;</span>
+plt.hist(time, num_bins, color=<span class="hljs-string">&quot;#509839&quot;</span>,normed=<span class="hljs-number">1</span>)
+
+<span class="hljs-comment"># &#x6307;&#x5B9A;&#x663E;&#x793A;&#x523B;&#x5EA6;&#x7684;&#x4E2A;&#x6570; </span>
+x_ = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(min_time, max_time+<span class="hljs-number">1</span>)]
+plt.xticks(x_[::width])
+
+<span class="hljs-comment"># &#x663E;&#x793A;&#x7F51;&#x683C;</span>
+plt.grid(<span class="hljs-keyword">True</span>, linestyle=<span class="hljs-string">&quot;--&quot;</span>, alpha=<span class="hljs-number">0.5</span>)
+
+<span class="hljs-comment"># &#x6307;&#x5B9A;&#x6807;&#x9898;</span>
+plt.title(<span class="hljs-string">&quot;Top250&#x7684;IMDB&#x7535;&#x5F71;&#x65F6;&#x957F;&#x7EDF;&#x8BA1;&quot;</span>)
+plt.savefig(<span class="hljs-string">&quot;./IMDB.png&quot;</span>)
+plt.show()
+</code></pre>
+<h1 id="&#x997C;&#x56FE;">&#x997C;&#x56FE;</h1>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-d9e86aaa6e99b3f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pro_learn"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x80FD;&#x6B63;&#x5E38;&#x663E;&#x793A;&#x4E2D;&#x6587;(Mac)</span>
+plt.rcParams[<span class="hljs-string">&apos;font.family&apos;</span>] = [<span class="hljs-string">&apos;Arial Unicode MS&apos;</span>]
+
+<span class="hljs-comment"># &#x5B66;&#x4E60;&#x65F6;&#x95F4;&#x5206;&#x914D;</span>
+pro_name = [<span class="hljs-string">&quot;C++&quot;</span>, <span class="hljs-string">&quot;Python&quot;</span>, <span class="hljs-string">&quot;Java&quot;</span>, <span class="hljs-string">&quot;Go&quot;</span>, <span class="hljs-string">&quot;Swift&quot;</span>]
+pro_time = [<span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>]
+
+<span class="hljs-comment"># &#x753B;&#x997C;</span>
+plt.pie(pro_time, labels=pro_name, autopct=<span class="hljs-string">&quot;%3.2f%%&quot;</span>, colors=[<span class="hljs-string">&quot;#ea6f5a&quot;</span>, <span class="hljs-string">&quot;#509839&quot;</span>, <span class="hljs-string">&quot;#0c8ac5&quot;</span>, <span class="hljs-string">&quot;#d29922&quot;</span>, <span class="hljs-string">&quot;#fdf6e3&quot;</span>])
+
+<span class="hljs-comment"># &#x6307;&#x5B9A;&#x6807;&#x9898;</span>
+plt.title(<span class="hljs-string">&quot;&#x5B66;&#x4E60;&#x65F6;&#x95F4;&#x5206;&#x914D;&quot;</span>)
+
+<span class="hljs-comment"># &#x4FDD;&#x8BC1;&#x4E3A;&#x56FE;&#x5F62;&#x4E3A;&#x6B63;&#x5706;</span>
+plt.axis(<span class="hljs-string">&quot;equal&quot;</span>)
+
+<span class="hljs-comment"># &#x663E;&#x793A;&#x56FE;&#x793A;</span>
+plt.legend(loc=<span class="hljs-string">&quot;best&quot;</span>)
+plt.savefig(<span class="hljs-string">&quot;./pro_learn.png&quot;</span>)
+plt.show()
+</code></pre>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="knnPrediction.html" class="navigation navigation-prev " aria-label="上一页: K近邻(knn)算法预测电影类型">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Numpy.html" class="navigation navigation-next " aria-label="下一页: 机器学习三剑客之Numpy">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"机器学习三剑客之Matplotlab","level":"1.5.5","depth":2,"next":{"title":"机器学习三剑客之Numpy","level":"1.5.6","depth":2,"path":"Numpy.md","ref":"Numpy.md","articles":[]},"previous":{"title":"K近邻(knn)算法预测电影类型","level":"1.5.4","depth":2,"path":"knnPrediction.md","ref":"knnPrediction.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"Matplotlab.md","mtime":"2020-10-18T14:18:00.131Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+

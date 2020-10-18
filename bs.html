@@ -1,0 +1,695 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>向浏览器输入网址,到完成请求的整个过程 - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="prev" href="pyTestpy.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >向浏览器输入网址,到完成请求的整个过程</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <ul>
+<li><ol>
+<li>&#x5411;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;&#x7F51;&#x5740; <a href="http://www.baidu.com/" target="_blank">http://www.baidu.com/</a></li>
+</ol>
+</li>
+<li><ol>
+<li>&#x67E5;&#x8BE2;&#x672C;&#x5730;&#x8BA1;&#x7B97;&#x673A;&#x6709;&#x6CA1;&#x6709;&#x5B58;&#x50A8;&#x57DF;&#x540D;baidu.com &#x5BF9;&#x5E94;&#x7684;&#x670D;&#x52A1;&#x5668;IP, &#x5982;&#x679C;&#x5B58;&#x50A8;&#x4E86;,&#x6D4F;&#x89C8;&#x5668;&#x76F4;&#x63A5;&#x5411;&#x76EE;&#x6807;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x8D77;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x7684;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5B58;&#x50A8;, &#x5219;&#x5411;DNS&#x670D;&#x52A1;&#x5668;&#x53D1;&#x8D77;&quot;&#x67E5;&#x8BE2;baidu.com&#x5BF9;&#x5E94;&#x670D;&#x52A1;&#x5668;IP&quot;&#x7684;&#x8BF7;&#x6C42;, DNS&#x670D;&#x52A1;&#x5668;&#x8FD4;&#x56DE;baidu.com&#x5BF9;&#x5E94;&#x7684;&#x76EE;&#x6807;IP&#x540E;, &#x5411;&#x76EE;&#x6807;IP&#x53D1;&#x8D77;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x7684;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;,&#x5982;&#x679C;&#x8FDE;&#x63A5;&#x6210;&#x529F;,&#x5219;&#x5728;&#x672C;&#x5730;&#x5907;&#x4EFD;&#x76EE;&#x6807;IP</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>&#x5C06;&#x8BF7;&#x6C42;&#x53D1;&#x9001;&#x5230;&#x76EE;&#x6807;IP&#x7684;&#x5177;&#x4F53;&#x7EC6;&#x8282;(&#x4E3A;&#x4EC0;&#x4E48;MAC&#x5730;&#x5740;&#x4E0E;IP&#x5730;&#x5740;&#x7F3A;&#x4E00;&#x4E0D;&#x53EF;) : &#x5728;OSI&#x4E03;&#x5C42;&#x534F;&#x8BAE;&#x4E2D;MAC&#x5730;&#x5740;&#x5C5E;&#x4E8E;&#x7B2C;&#x4E8C;&#x5C42;<strong>&#x6570;&#x636E;&#x94FE;&#x8DEF;&#x5C42;</strong>, IP&#x5730;&#x5740;&#x5C5E;&#x4E8E;&#x7B2C;&#x4E09;&#x5C42;<strong>&#x7F51;&#x7EDC;&#x5C42;</strong>, &#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x51FA;&#x7684;&#x8BF7;&#x6C42;&#x65F6;, &#x4F1A;&#x53D1;&#x8D77;ARP&#x5E7F;&#x64AD;, &#x67E5;&#x8BE2;&#x672C;&#x5730;&#x7F51;&#x7EDC;&#x4E2D;,&#x662F;&#x5426;&#x5B58;&#x5728;&#x76EE;&#x6807;IP&#x4E3B;&#x673A;, &#x5982;&#x679C;&#x5B58;&#x5728;, &#x76F4;&#x63A5;&#x5C06;&#x6D4F;&#x89C8;&#x5668;&#x8BF7;&#x6C42;&#x7684;MAC&#x5730;&#x5740;&#x5B9A;&#x4E3A;&#x76EE;&#x6807;IP&#x4E3B;&#x673A;&#x7684;MAC&#x5730;&#x5740;, &#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;, &#x5219;&#x5C06;&#x6D4F;&#x89C8;&#x5668;&#x8BF7;&#x6C42;&#x7684;MAC&#x5730;&#x5740;&#x5B9A;&#x4E3A;&#x672C;&#x5730;&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x4E2D;&#x8DEF;&#x7531;&#x5668;A&#x7684;MAC&#x5730;&#x5740;, &#x8DEF;&#x7531;&#x5668;A&#x4F1A;&#x5C06;&#x6D4F;&#x89C8;&#x5668;&#x8BF7;&#x6C42;&#x8F6C;&#x53D1;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x7F51;&#x7EDC;&#x7684;&#x8DEF;&#x7531;&#x5668;B(&#x8BF7;&#x6C42;&#x7684;mac&#x5730;&#x5740;&#x88AB;&#x4FEE;&#x6539;, &#x4FEE;&#x6539;&#x4E3A;&#x8DEF;&#x7531;&#x5668;B&#x7684;mac&#x5730;&#x5740;), &#x8DEF;&#x7531;&#x5668;B&#x5B50;&#x7F51;&#x5185;&#x5982;&#x679C;&#x5B58;&#x5728;&#x76EE;&#x6807;&#x4E3B;&#x673A;IP, &#x5219;&#x76F4;&#x63A5;&#x5C06;&#x6D4F;&#x89C8;&#x5668;&#x8BF7;&#x6C42;&#x7684;ip&#x5730;&#x5740;&#x4FEE;&#x6539;&#x4E3A;&#x76EE;&#x6807;&#x4E3B;&#x673A;&#x7684;MAC&#x5730;&#x5740;, &#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;, &#x5219;&#x8F6C;&#x53D1;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;C, &#x901A;&#x8FC7;&#x4E0D;&#x65AD;&#x5730;&#x4FEE;&#x6539;&#x8BF7;&#x6C42;MAC&#x5730;&#x5740;&#x5B8C;&#x6210;&#x4E86;&#x6D4F;&#x89C8;&#x5668;&#x8BF7;&#x6C42;&#x5728;&#x4E92;&#x8054;&#x7F51;&#x5185;&#x7684;&#x5C42;&#x5C42;&#x63A5;&#x529B;,&#x6700;&#x7EC8;&#x5230;&#x8FBE;&#x76EE;&#x6807;IP&#x4E3B;&#x673A;
+<img src="http://upload-images.jianshu.io/upload_images/3203841-e17833fbaa241608.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8BF7;&#x6C42;&#x4E0E;&#x54CD;&#x5E94;"></p>
+</blockquote>
+<ul>
+<li><ol>
+<li>&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x8BF7;&#x6C42;&#x540E;, &#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x53CD;&#x5411;&#x4EE3;&#x7406;&#x670D;&#x52A1;&#x8F6F;&#x4EF6;(&#x5982;Nginx), Nginx&#x4F1A;&#x5C06;&#x8BF7;&#x6C42;&#x8F6C;&#x53D1;&#x5230;&#x670D;&#x52A1;&#x5BF9;&#x5E94;&#x7684;&#x7AEF;&#x53E3;(&#x4EE5;Django&#x670D;&#x52A1;&#x4E3A;&#x4F8B;, &#x5982;&#x679C;Django&#x8FD0;&#x884C;&#x5728;3309&#x7AEF;&#x53E3;, Nginx&#x4F1A;&#x5C06;&#x8BF7;&#x6C42;&#x4ECE;80&#x7AEF;&#x53E3;&#x8F6C;&#x53D1;&#x5230;3309&#x7AEF;&#x53E3;)</li>
+</ol>
+</li>
+<li><ol>
+<li>Django&#x63A5;&#x6536;&#x5230;&#x8BF7;&#x6C42;&#x540E;, &#x4E2D;&#x95F4;&#x4EF6;&#x4F1A;&#x5BF9;&#x8BF7;&#x6C42;&#x8FDB;&#x884C;&#x9884;&#x5904;&#x7406;, &#x7136;&#x540E;&#x8BF7;&#x6C42;&#x4F1A;&#x6839;&#x636E;&#x6B63;&#x5219;, &#x5339;&#x914D;&#x4E3B;&#x76EE;&#x5F55;&#x4E0B;&#x7684;urls.py, &#x5339;&#x914D;&#x6210;&#x529F;&#x540E;, &#x4F1A;&#x5C06;&#x8BF7;&#x6C42;&#x5206;&#x53D1;&#x7ED9;&#x72EC;&#x7ACB;&#x7684;App, &#x5728;App&#x5185;&#x4E5F;&#x542B;&#x6709;urls.py, &#x901A;&#x8FC7;&#x6B63;&#x5219;&#x5339;&#x914D;, &#x8BF7;&#x6C42;&#x4F1A;&#x88AB;&#x5BF9;&#x5E94;&#x5230;App&#x5185;&#x76F8;&#x5E94;&#x7684;&#x89C6;&#x56FE;&#x51FD;&#x6570;<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-546bd3615dc98665.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x670D;&#x52A1;&#x5668;&#x5904;&#x7406;&#x8BF7;&#x6C42;"></p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><ol>
+<li>&#x89C6;&#x56FE;&#x51FD;&#x6570;&#x4F1A;&#x5904;&#x7406;&#x8BF7;&#x6C42;, &#x4EA7;&#x751F;&#x54CD;&#x5E94;, &#x54CD;&#x5E94;&#x901A;&#x8FC7;&#x4E2D;&#x95F4;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x540E;, &#x79BB;&#x5F00;Django, &#x8FD4;&#x56DE;&#x7ED9;Nginx, Nginx &#x4F1A;&#x5C06;&#x54CD;&#x5E94;&#x8FD4;&#x56DE;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;(&#x8FD9;&#x91CC;&#x7B80;&#x5316;&#x8FD4;&#x56DE;&#x8DEF;&#x7EBF;)</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>&#x5173;&#x4E8E;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x548C;&#x56DB;&#x6B21;&#x6325;&#x624B;:</p>
+<h4 id="&#x4E09;&#x6B21;&#x63E1;&#x624B;">&#x4E09;&#x6B21;&#x63E1;&#x624B;:</h4>
+<ul>
+<li><ol>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x8D77;&#x8FDE;&#x63A5;&#x8BF7;&#x6C42;(&#x6D4F;&#x89C8;&#x5668;: &#x6211;&#x4EEC;&#x660E;&#x5929;&#x65E9;&#x4E0A;8&#x70B9;&#x89C1;&#x9762;, &#x6536;&#x5230;&#x8BF7;&#x56DE;&#x590D;)</li>
+</ol>
+</li>
+<li><ol>
+<li>&#x670D;&#x52A1;&#x5668;&#x63A5;&#x6536;&#x5230;&#x8BF7;&#x6C42;&#x540E;, &#x8FD4;&#x56DE;&#x54CD;&#x5E94;(&#x670D;&#x52A1;&#x7AEF;: &#x786E;&#x8BA4;&#x6536;&#x5230;, &#x6211;&#x4EEC;&#x660E;&#x5929;&#x65E9;&#x4E0A;&#x516B;&#x70B9;&#x89C1;&#x9762;)</li>
+</ol>
+</li>
+<li><ol>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x51FA;&#x63A5;&#x6536;&#x5230;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x7684;&#x786E;&#x8BA4;&#x4FE1;&#x606F;(&#x6D4F;&#x89C8;&#x5668;: &#x6211;&#x6536;&#x5230;&#x4E86;&#x4F60;&#x7684;&#x786E;&#x8BA4;&#x4FE1;&#x606F;!)<h4 id="&#x56DB;&#x6B21;&#x6325;&#x624B;">&#x56DB;&#x6B21;&#x6325;&#x624B;:</h4>
+</li>
+</ol>
+</li>
+<li><ol>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x51FA;&#x65AD;&#x5F00;&#x8FDE;&#x63A5;&#x7684;&#x8BF7;&#x6C42;<strong>(&#x6D4F;&#x89C8;&#x5668;: &#x6211;&#x8BE5;&#x95EE;&#x7684;&#x90FD;&#x95EE;&#x5B8C;&#x4E86;, &#x6CA1;&#x6709;&#x5176;&#x5B83;&#x7684;&#x95EE;&#x9898;&#x4E86;)</strong></li>
+</ol>
+</li>
+<li><ol>
+<li>&#x670D;&#x52A1;&#x7AEF;&#x8FD4;&#x56DE;&#x54CD;&#x5E94;(&#x670D;&#x52A1;&#x7AEF;&#x786E;&#x8BA4;&#x4E86;&#x6D4F;&#x89C8;&#x5668;&#x4E0D;&#x4F1A;&#x518D;&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#x7684;&#x4FE1;&#x606F;)<strong>(&#x670D;&#x52A1;&#x5668;: &#x6211;&#x6536;&#x5230;&#x4E86;&#x4F60;&#x95EE;&#x5B8C;&#x4E86;&#x7684;&#x4FE1;&#x606F;&#x4E86;,&#x5F85;&#x6211;&#x628A;&#x4F60;&#x524D;&#x9762;&#x7684;&#x95EE;&#x9898;&#x56DE;&#x7B54;&#x5B8C;, &#x6211;&#x4EEC;&#x5C31;&#x65AD;&#x5F00;&#x8FDE;&#x63A5;)</strong></li>
+</ol>
+</li>
+<li><ol>
+<li>&#x670D;&#x52A1;&#x7AEF;&#x53D1;&#x51FA;&#x65AD;&#x5F00;&#x8FDE;&#x63A5;&#x7684;&#x8BF7;&#x6C42;<strong>(&#x670D;&#x52A1;&#x5668;: &#x6211;&#x628A;&#x4F60;&#x7684;&#x95EE;&#x9898;&#x90FD;&#x56DE;&#x7B54;&#x5B8C;&#x4E86;, &#x4F60;&#x786E;&#x8BA4;&#x6CA1;&#x6709;&#x5176;&#x4ED6;&#x8981;&#x95EE;&#x7684;&#x4E86;&#x4E48;?)</strong></li>
+</ol>
+</li>
+<li><ol>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x8FD4;&#x56DE;&#x54CD;&#x5E94;(&#x6D4F;&#x89C8;&#x5668;&#x786E;&#x8BA4;&#x4E86;&#x670D;&#x52A1;&#x7AEF;&#x5DF2;&#x7ECF;&#x5C06;&#x8D44;&#x6E90;&#x53D1;&#x9001;&#x5B8C;&#x6BD5;&#x7684;&#x4FE1;&#x606F;)<strong>(&#x6D4F;&#x89C8;&#x5668;: &#x6211;&#x6CA1;&#x6709;&#x5176;&#x5B83;&#x8981;&#x95EE;&#x7684;, &#x65AD;&#x5F00;&#x8FDE;&#x63A5;&#x5427;!)</strong>
+<img src="http://upload-images.jianshu.io/upload_images/3203841-4773037398849b29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x4E09;&#x6B21;&#x63E1;&#x624B;&#x4E0E;&#x56DB;&#x6B21;&#x6325;&#x624B;.png"></li>
+</ol>
+</li>
+</ul>
+</blockquote>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="pyTestpy.html" class="navigation navigation-prev navigation-unique" aria-label="上一页: 用python检测python---批量检查注释率是否达标">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"向浏览器输入网址,到完成请求的整个过程","level":"1.7.4","depth":2,"previous":{"title":"用python检测python---批量检查注释率是否达标","level":"1.7.3","depth":2,"path":"pyTestpy.md","ref":"pyTestpy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"bs.md","mtime":"2020-10-18T14:18:00.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,686 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>详解Django自定义过滤器 - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    <link rel="next" href="MachineLearning.html" />
+    <link rel="prev" href="AnonymityChat.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >详解Django自定义过滤器</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <p><img src="http://upload-images.jianshu.io/upload_images/3203841-655512380080d8bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8FC7;&#x6EE4;&#x5668;&#x4E0E;&#x51FD;&#x6570;"></p>
+<h4 id="django&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x672C;&#x8D28;&#x662F;&#x51FD;&#x6570;&#x4F46;&#x51FD;&#x6570;&#x592A;&#x591A;&#x4E86;&#x4E3A;&#x4E86;&#x663E;&#x793A;&#x81EA;&#x5DF1;&#x7684;&#x4E0E;&#x4F17;&#x4E0D;&#x540C;&#x8BBE;&#x8BA1;&#x8005;&#x4EEC;&#x60F3;&#x4E86;&#x4E2A;&#x540D;&#x5B57;&#x8FC7;&#x6EE4;&#x5668;">django&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x672C;&#x8D28;&#x662F;&#x51FD;&#x6570;,&#x4F46;&quot;&#x51FD;&#x6570;&quot;&#x592A;&#x591A;&#x4E86;,&#x4E3A;&#x4E86;&#x663E;&#x793A;&#x81EA;&#x5DF1;&#x7684;&#x4E0E;&#x4F17;&#x4E0D;&#x540C;,&#x8BBE;&#x8BA1;&#x8005;&#x4EEC;&#x60F3;&#x4E86;&#x4E2A;&#x540D;&#x5B57;&quot;&#x8FC7;&#x6EE4;&#x5668;&quot;...</h4>
+<h4 id="django&#x6709;&#x4E00;&#x4E9B;&#x5185;&#x7F6E;&#x7684;&#x8FC7;&#x6EE4;&#x5668;&#x4F46;&#x548C;&#x65B0;&#x624B;&#x8D5B;&#x8F66;&#x4E0D;&#x591A;&#x628A;&#x5B57;&#x6BCD;&#x8F6C;&#x6210;&#x5C0F;&#x5199;&#x6C42;&#x6570;&#x7EC4;&#x957F;&#x5EA6;&#x4ECE;&#x6570;&#x7EC4;&#x4E2D;&#x53D6;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x503C;&#x529F;&#x80FD;&#x5F88;&#x57FA;&#x7840;&#x4E0D;&#x591F;&#x5F3A;&#x5927;">django&#x6709;&#x4E00;&#x4E9B;&#x5185;&#x7F6E;&#x7684;&#x8FC7;&#x6EE4;&#x5668;,&#x4F46;&#x548C;&quot;&#x65B0;&#x624B;&#x8D5B;&#x8F66;&quot;&#x4E0D;&#x591A;(&#x628A;&#x5B57;&#x6BCD;&#x8F6C;&#x6210;&#x5C0F;&#x5199;,&#x6C42;&#x6570;&#x7EC4;&#x957F;&#x5EA6;,&#x4ECE;&#x6570;&#x7EC4;&#x4E2D;&#x53D6;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x503C;),&#x529F;&#x80FD;&#x5F88;&#x57FA;&#x7840;(&#x4E0D;&#x591F;&#x5F3A;&#x5927;)...</h4>
+<h4 id="&#x62B1;&#x7740;&#x4E00;&#x79CD;&#x7814;&#x7A76;&#x7422;&#x78E8;&#x7684;&#x5FC3;&#x6001;&#x8BD5;&#x7740;&#x81EA;&#x5DF1;&#x52A8;&#x624B;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;&#x529F;&#x80FD;&#x5F88;&#x7B80;&#x5355;&#x6C42;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x503C;&#x4ECA;&#x5929;&#x592A;&#x665A;&#x4E86;&#x5077;&#x4E2A;&#x61D2;&#x54C8;">&#x62B1;&#x7740;&#x4E00;&#x79CD;&quot;&#x7814;&#x7A76;&#x7422;&#x78E8;&quot;&#x7684;&#x5FC3;&#x6001;,&#x8BD5;&#x7740;&#x81EA;&#x5DF1;&#x52A8;&#x624B;&#x5199;&#x4E00;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;:&#x529F;&#x80FD;&#x5F88;&#x7B80;&#x5355;,&#x6C42;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x503C;(&#x4ECA;&#x5929;&#x592A;&#x665A;&#x4E86;,&#x5077;&#x4E2A;&#x61D2;&#x54C8;~)</h4>
+<h2 id="&#x529F;&#x80FD;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;">&#x529F;&#x80FD;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;:</h2>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-4d69e3a8004a9287.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8FC7;&#x6EE4;&#x5668;"></p>
+<h2 id="&#x5148;&#x7ED9;&#x51FA;&#x6211;&#x7684;&#x4E00;&#x70B9;&#x4F53;&#x4F1A;">&#x5148;&#x7ED9;&#x51FA;&#x6211;&#x7684;&#x4E00;&#x70B9;&#x4F53;&#x4F1A;:</h2>
+<p>&#x5728;django&#x662F;MVP&#x7684;&#x67B6;&#x6784;,&#x6570;&#x636E;&#x6A21;&#x578B;&#x4EA4;&#x7ED9;Model,&#x903B;&#x8F91;&#x5904;&#x7406;&#x4EA4;&#x7ED9;View,&#x6837;&#x5F0F;&#x6A21;&#x677F;&#x4EA4;&#x7ED9;temPlate,&#x8FD9;&#x662F;&#x516C;&#x8BA4;&#x7684;&#x5408;&#x7406;&#x67B6;&#x6784;.</p>
+<p>&#x968F;&#x7740;&#x9879;&#x76EE;&#x89C4;&#x6A21;&#x7684;&#x589E;&#x5927;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x4E00;&#x4E9B;&#x95EE;&#x9898;,view&#x638C;&#x7BA1;&#x4E86;&#x6240;&#x6709;&#x7684;&#x903B;&#x8F91;&#x5904;&#x7406;,&#x4E00;&#x4E9B;&#x5F88;&#x57FA;&#x7840;&#x7684;&#x903B;&#x8F91;&#x529F;&#x80FD;(&#x6BD4;&#x5982;&#x6C42;&#x6700;&#x5927;&#x503C;,&#x6700;&#x5C0F;&#x503C;,&#x7ED9;&#x7528;&#x6237;&#x540D;&#x52A0;&#x4E2A;&#x524D;&#x7F00;)&#x662F;&#x6CA1;&#x5FC5;&#x8981;&#x4E0E;&#x6838;&#x5FC3;&#x903B;&#x8F91;&#x653E;&#x5728;&#x4E00;&#x8D77;&#x7684;,&#x4E0D;&#x4EC5;&#x8BA9;&#x4EE3;&#x7801;&#x663E;&#x5F97;&#x5197;&#x4F59;,&#x800C;&#x4E14;&#x4E5F;&#x5F71;&#x54CD;&#x6838;&#x5FC3;&#x6A21;&#x5757;&#x7684;&#x8FED;&#x4EE3;&#x7EF4;&#x62A4;...</p>
+<p>&#x6240;&#x4EE5;django&#x7684;&#x8BBE;&#x8BA1;&#x8005;,&#x51B3;&#x5B9A;&#x628A;&#x4E00;&#x4E9B;&#x5F88;&#x57FA;&#x7840;&#x901A;&#x7528;&#x7684;&#x903B;&#x8F91;&#x6A21;&#x5757;&#x5355;&#x72EC;&#x53D6;&#x51FA;,&#x653E;&#x5230;app&#x76EE;&#x5F55;&#x4E0B;&#x7684;<code>templatetags</code>&#x6587;&#x4EF6;&#x5939;&#x5185;(&#x6587;&#x4EF6;&#x5939;&#x540D;&#x5B57;&#x4E0D;&#x53EF;&#x6539;,&#x5426;&#x5219;&#x4F1A;django&#x4F1A;&#x65E0;&#x6CD5;&#x8BC6;&#x522B;),<code>templatetags</code>&#x53EF;&#x4EE5;&#x5B58;&#x653E;&#x591A;&#x4E2A;&#x6587;&#x4EF6;,&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x5B58;&#x653E;&#x591A;&#x4E2A;&#x529F;&#x80FD;&#x76F8;&#x5173;&#x7684;&#x8FC7;&#x6EE4;&#x5668;,&#x4F7F;&#x7528;&#x529F;&#x80FD;&#x76F8;&#x5173;&#x7684;&#x8FC7;&#x6EE4;&#x5668;&#x65F6;,&#x76F4;&#x63A5;&#x5BFC;&#x5165;&#x5355;&#x4E2A;&#x6587;&#x4EF6;&#x5C31;&#x53EF;&#x4EE5;&#x4E00;&#x5E76;&#x4F7F;&#x7528;&#x76F8;&#x5173;&#x529F;&#x80FD;,&#x4E0D;&#x6127;&#x662F;django,&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x771F;&#x7684;&#x5F88;&#x8D5E;!</p>
+<h2 id="&#x5177;&#x4F53;&#x4F7F;&#x7528;&#x89C4;&#x5219;">&#x5177;&#x4F53;&#x4F7F;&#x7528;&#x89C4;&#x5219;:</h2>
+<h4 id="1&#x5982;&#x679C;&#x5BF9;&#x67D0;&#x4E2A;app&#x4E0B;&#x7684;&#x7F51;&#x9875;&#x4F7F;&#x7528;&#x8FC7;&#x6EE4;&#x5668;&#x5219;&#x5728;&#x5BF9;&#x5E94;app&#x7684;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;&#x540D;&#x4E3A;templatetags&#x7684;&#x6587;&#x4EF6;&#x5939;&#x8FD9;&#x91CC;&#x7684;pad&#x4E3A;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;app">1.&#x5982;&#x679C;&#x5BF9;&#x67D0;&#x4E2A;app&#x4E0B;&#x7684;&#x7F51;&#x9875;&#x4F7F;&#x7528;&#x8FC7;&#x6EE4;&#x5668;,&#x5219;&#x5728;&#x5BF9;&#x5E94;app&#x7684;&#x6839;&#x76EE;&#x5F55;&#x4E0B;,&#x521B;&#x5EFA;&#x540D;&#x4E3A;<code>templatetags</code>&#x7684;&#x6587;&#x4EF6;&#x5939;(&#x8FD9;&#x91CC;&#x7684;<code>pad</code>&#x4E3A;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;app)</h4>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-548fe25ed743058c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x65B0;&#x5EFA;&#x76EE;&#x5F55;"></p>
+<h4 id="2&#x5728;templatetags&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x65B0;&#x5EFA;&#x7A7A;&#x6587;&#x4EF6;initpy&#x8FD9;&#x662F;python&#x7684;&#x89C4;&#x77E9;initpy&#x8868;&#x793A;&#x5176;&#x6240;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x8F7D;&#x5165;&#x7684;&#x6A21;&#x5757;init&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x53EF;&#x4E3A;&#x7A7A;&#x65B0;&#x5EFA;&#x6587;&#x4EF6;zhaofilterpy&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x5B58;&#x653E;&#x591A;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;&#x6587;&#x4EF6;&#x540D;&#x5B57;&#x53EF;&#x81EA;&#x5B9A;&#x4E49;">2.&#x5728;<code>templatetags</code>&#x6587;&#x4EF6;&#x5939;&#x4E0B;,&#x65B0;&#x5EFA;&#x7A7A;&#x6587;&#x4EF6;<code>__init__.py</code>(&#x8FD9;&#x662F;python&#x7684;&#x89C4;&#x77E9;,<code>__init__.py</code>&#x8868;&#x793A;&#x5176;&#x6240;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x8F7D;&#x5165;&#x7684;&#x6A21;&#x5757;,<code>__init__</code>&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x53EF;&#x4E3A;&#x7A7A;),&#x65B0;&#x5EFA;&#x6587;&#x4EF6;<code>zhao_filter.py</code>(&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x53EF;&#x4EE5;&#x5B58;&#x653E;&#x591A;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;,&#x6587;&#x4EF6;&#x540D;&#x5B57;&#x53EF;&#x81EA;&#x5B9A;&#x4E49;...)</h4>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-8e05b19f4249412c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x65B0;&#x5EFA;&#x6587;&#x4EF6;"></p>
+<h4 id="3&#x5728;myfilterpy&#x4E2D;&#x5148;&#x5BFC;&#x5165;&#x5934;&#x6587;&#x4EF6;&#x7F16;&#x5199;&#x8FC7;&#x6EE4;&#x5668;&#x51FD;&#x6570;&#x8FD9;&#x91CC;&#x5077;&#x4E2A;&#x61D2;&#x76F4;&#x63A5;&#x7528;python&#x7684;&#x5185;&#x7F6E;&#x51FD;&#x6570;&#x505A;&#x793A;&#x8303;&#x6CE8;&#x518C;&#x8FC7;&#x6EE4;&#x5668;&#x8FD8;&#x662F;&#x559C;&#x6B22;&#x88C5;&#x9970;&#x5668;">3.&#x5728;<code>my_filter.py</code>&#x4E2D;,&#x5148;&#x5BFC;&#x5165;&#x5934;&#x6587;&#x4EF6;,&#x7F16;&#x5199;&#x8FC7;&#x6EE4;&#x5668;&#x51FD;&#x6570;(&#x8FD9;&#x91CC;&#x5077;&#x4E2A;&#x61D2;,&#x76F4;&#x63A5;&#x7528;python&#x7684;&#x5185;&#x7F6E;&#x51FD;&#x6570;&#x505A;&#x793A;&#x8303;),&#x6CE8;&#x518C;&#x8FC7;&#x6EE4;&#x5668;(&#x8FD8;&#x662F;&#x559C;&#x6B22;&#x88C5;&#x9970;&#x5668;);</h4>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> django.template <span class="hljs-keyword">import</span> Library
+
+<span class="hljs-comment"># &#x5C06;&#x6CE8;&#x518C;&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x4E3A;register&#x5BF9;&#x8C61;</span>
+register =  Library()
+
+
+<span class="hljs-comment"># &#x4F7F;&#x7528;&#x88C5;&#x9970;&#x5668;&#x6CE8;&#x518C;</span>
+<span class="hljs-meta">@register.filter</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_list_max</span><span class="hljs-params">(val)</span>:</span>
+    <span class="hljs-comment"># val&#x4E3A;&#x4E00;&#x4E2A;&#x5217;&#x8868;,&#x901A;&#x8FC7;&#x8FC7;&#x6EE4;&#x5668;&#x53D6;&#x5F97;&#x5176;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x503C;</span>
+    result = max(val)
+
+    <span class="hljs-keyword">return</span> result
+</code></pre>
+<h4 id="4&#x5C06;&#x8FC7;&#x6EE4;&#x5668;&#x52A0;&#x8F7D;&#x5230;html-&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x8FC7;&#x6EE4;&#x5668;">4.&#x5C06;&#x8FC7;&#x6EE4;&#x5668;&#x52A0;&#x8F7D;&#x5230;html, &#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x8FC7;&#x6EE4;&#x5668;</h4>
+<pre><code class="lang-html">
+<span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>&#x8FC7;&#x6EE4;&#x5668;<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+
+{# &#x52A0;&#x8F7D;&#x8FC7;&#x6EE4;&#x5668;&#x6240;&#x5728;&#x7684;&#x6587;&#x4EF6;,&#x7531;&#x4E8E;templatetags&#x7684;&#x6587;&#x4EF6;&#x540D;&#x662F;&#x56FA;&#x5B9A;&#x7684;,django&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x627E;&#x5230;&#x8FC7;&#x6EE4;&#x5668;&#x6587;&#x4EF6;&#x6240;&#x5728;&#x7684;&#x4F4D;&#x7F6E; #}
+{% load zhao_fillter %}
+
+
+{# &#x663E;&#x793A;&#x5217;&#x8868;&#x6570;&#x636E; #}
+&#x5217;&#x8868;&#x7684;&#x6570;&#x636E;&#x4E3A;:{{ my_list }}
+
+<span class="hljs-tag">&lt;<span class="hljs-name">hr</span>&gt;</span>
+
+{# &#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x8FC7;&#x6EE4;&#x5668;get_list_max,&#x83B7;&#x5F97;&#x5217;&#x8868;&#x4E2D;&#x6700;&#x5927;&#x7684;&#x503C; #}
+&#x5217;&#x8868;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x503C;&#x4E3A;:{{ my_list | get_list_max }}
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>&#x6709;&#x65F6;&#x5019;&#x6D4B;&#x8BD5;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x62BD;&#x98CE;&#xFF0C;&#x627E;&#x4E0D;&#x5230;&#x8FC7;&#x6EE4;&#x5668;&#xFF0C;&#x6B64;&#x65F6;&#x5220;&#x9664;<code>__init__.py</code>&#xFF0C;&#x518D;&#x91CD;&#x65B0;&#x521B;&#x5EFA;<code>__init__.py</code>&#x5373;&#x53EF;&#xFF01;</p>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="AnonymityChat.html" class="navigation navigation-prev " aria-label="上一页: Python实现多人在线匿名聊天的小程序">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="MachineLearning.html" class="navigation navigation-next " aria-label="下一页: 机器学习">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"详解Django自定义过滤器","level":"1.4.4","depth":2,"next":{"title":"机器学习","level":"1.5","depth":1,"path":"MachineLearning.md","ref":"MachineLearning.md","articles":[{"title":"泰坦尼克乘客存活状况(决策树案例)","level":"1.5.1","depth":2,"path":"Titanic.md","ref":"Titanic.md","articles":[]},{"title":"朴素贝叶斯完成新闻分类","level":"1.5.2","depth":2,"path":"NaiveBayesNews.md","ref":"NaiveBayesNews.md","articles":[]},{"title":"Tensorflow可视化编程","level":"1.5.3","depth":2,"path":"TensorflowView.md","ref":"TensorflowView.md","articles":[]},{"title":"K近邻(knn)算法预测电影类型","level":"1.5.4","depth":2,"path":"knnPrediction.md","ref":"knnPrediction.md","articles":[]},{"title":"机器学习三剑客之Matplotlab","level":"1.5.5","depth":2,"path":"Matplotlab.md","ref":"Matplotlab.md","articles":[]},{"title":"机器学习三剑客之Numpy","level":"1.5.6","depth":2,"path":"Numpy.md","ref":"Numpy.md","articles":[]},{"title":"机器学习三剑客之Pandas","level":"1.5.7","depth":2,"path":"Pandas.md","ref":"Pandas.md","articles":[]}]},"previous":{"title":"Python实现多人在线匿名聊天的小程序","level":"1.4.3","depth":2,"path":"AnonymityChat.md","ref":"AnonymityChat.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"diyFilter.md","mtime":"2020-10-18T14:18:00.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+

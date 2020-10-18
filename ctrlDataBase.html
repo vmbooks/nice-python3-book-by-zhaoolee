@@ -1,0 +1,818 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>操作数据库Mysql,Mongodb,Redis - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    <link rel="next" href="AnonymityChat.html" />
+    <link rel="prev" href="rwbase64.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >操作数据库Mysql,Mongodb,Redis</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <p><img src="http://upload-images.jianshu.io/upload_images/3203841-b29615ed32460878.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6570;&#x636E;&#x5E93;"></p>
+<h1 id="mysql">Mysql</h1>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-4696f8fa9263edf9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Mysql"></p>
+<blockquote>
+<p>MySQL&#x662F;&#x4E00;&#x4E2A;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#xFF0C;&#x7531;&#x745E;&#x5178;MySQL AB&#x516C;&#x53F8;&#x5F00;&#x53D1;&#xFF0C;&#x540E;&#x6765;&#x88AB;Sun&#x516C;&#x53F8;&#x6536;&#x8D2D;&#xFF0C;Sun&#x516C;&#x53F8;&#x540E;&#x6765;&#x53C8;&#x88AB;Oracle&#x516C;&#x53F8;&#x6536;&#x8D2D;&#xFF0C;&#x76EE;&#x524D;&#x5C5E;&#x4E8E;Oracle&#x65D7;&#x4E0B;&#x4EA7;&#x54C1;</p>
+<p>MySQL &#x8F6F;&#x4EF6;&#x91C7;&#x7528;&#x4E86;&#x53CC;&#x6388;&#x6743;&#x653F;&#x7B56;&#xFF0C;&#x5B83;&#x5206;&#x4E3A;&#x793E;&#x533A;&#x7248;&#x548C;&#x5546;&#x4E1A;&#x7248;&#xFF0C;&#x7531;&#x4E8E;&#x5176;&#x4F53;&#x79EF;&#x5C0F;&#x3001;&#x901F;&#x5EA6;&#x5FEB;&#x3001;&#x603B;&#x4F53;&#x62E5;&#x6709;&#x6210;&#x672C;&#x4F4E;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5F00;&#x653E;&#x6E90;&#x7801;&#x8FD9;&#x4E00;&#x7279;&#x70B9;&#xFF0C;&#x4E00;&#x822C;&#x4E2D;&#x5C0F;&#x578B;&#x7F51;&#x7AD9;&#x7684;&#x5F00;&#x53D1;&#x90FD;&#x9009;&#x62E9;MySQL&#x4F5C;&#x4E3A;&#x7F51;&#x7AD9;&#x6570;&#x636E;&#x5E93;.</p>
+</blockquote>
+<h2 id="&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;">&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;</h2>
+<pre><code class="lang-sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> zhaozhao <span class="hljs-keyword">charset</span>=utf8;
+
+<span class="hljs-keyword">use</span> zhaozhao;
+
+
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> zhaozhao_comic(
+
+    <span class="hljs-keyword">id</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">unsigned</span> primary <span class="hljs-keyword">key</span> auto_increment <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>,
+    <span class="hljs-keyword">name</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">100</span>),
+    zone <span class="hljs-built_in">varchar</span>(<span class="hljs-number">100</span>) 
+
+
+);
+
+<span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> zhaozhao_comic <span class="hljs-keyword">values</span>
+    (<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&#x65CB;&#x6DA1;&#x9E23;&#x4EBA;&quot;</span>, <span class="hljs-string">&quot;&#x6728;&#x53F6;&#x6751;&quot;</span>),
+    (<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&#x82CF;&#x82CF;&quot;</span>, <span class="hljs-string">&quot;&#x6D82;&#x5C71;&quot;</span>),
+    (<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&#x66F9;&#x7131;&#x5175;&quot;</span>, <span class="hljs-string">&quot;&#x9547;&#x9B42;&#x8857;&quot;</span>),
+    (<span class="hljs-number">0</span>, <span class="hljs-string">&quot;&#x5742;&#x7530;&#x94F6;&#x65F6;&quot;</span>, <span class="hljs-string">&quot;&#x4E07;&#x4E8B;&#x5C4B;&quot;</span>);
+</code></pre>
+<h1 id="&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;">&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;</h1>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> pymysql <span class="hljs-keyword">import</span> *
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-comment"># &#x521B;&#x5EFA;Connection&#x8FDE;&#x63A5;</span>
+    conn = connect(host=<span class="hljs-string">&apos;172.16.221.143&apos;</span>,port=<span class="hljs-number">3306</span>,database=<span class="hljs-string">&apos;zhaozhao&apos;</span>,user=<span class="hljs-string">&apos;root&apos;</span>,password=<span class="hljs-string">&apos;root&apos;</span>,charset=<span class="hljs-string">&apos;utf8&apos;</span>)
+
+    <span class="hljs-comment"># &#x83B7;&#x5F97;Cursor&#x5BF9;&#x8C61;</span>
+    cs1 = conn.cursor()
+    <span class="hljs-comment"># &#x6267;&#x884C;insert&#x8BED;&#x53E5;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;&#x6570;&#xFF1A;&#x6DFB;&#x52A0;&#x4E00;&#x6761;&#x6570;&#x636E;</span>
+
+    <span class="hljs-comment"># &#x589E;&#x52A0;</span>
+    count = cs1.execute(<span class="hljs-string">&apos;insert into zhaozhao_comic(name, zone) values(&quot;&#x6211;&#x7231;&#x7F57;&quot;, &quot;&#x98CE;&#x4E4B;&#x56FD;&quot;),(&quot;&#x5947;&#x62C9;&#x6BD4;&quot;, &quot;&#x96F7;&#x4E4B;&#x56FD;&quot;)&apos;</span>)
+    <span class="hljs-comment"># &#x6253;&#x5370;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x5171;&#x6709;&quot;</span>,count, <span class="hljs-string">&quot;&#x884C;&#x53D7;&#x5F71;&#x54CD;!&quot;</span>)
+    count = cs1.execute(<span class="hljs-string">&apos;insert into zhaozhao_comic values(0, &quot;&#x5965;&#x7279;&#x66FC;&quot;, &quot;M78&#x661F;&#x4E91;&quot;)&apos;</span>)
+    <span class="hljs-comment"># &#x6253;&#x5370;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x5171;&#x6709;&quot;</span>,count, <span class="hljs-string">&quot;&#x884C;&#x53D7;&#x5F71;&#x54CD;!&quot;</span>)
+
+    <span class="hljs-comment"># &#x6267;&#x884C;</span>
+    conn.commit()
+
+    <span class="hljs-comment"># &#x5220;&#x9664;</span>
+    count = cs1.execute(<span class="hljs-string">&apos;delete from zhaozhao_comic where name = &quot;&#x5947;&#x62C9;&#x6BD4;&quot; &apos;</span>)
+    <span class="hljs-comment"># &#x6253;&#x5370;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x5171;&#x6709;&quot;</span>,count, <span class="hljs-string">&quot;&#x884C;&#x53D7;&#x5F71;&#x54CD;!&quot;</span>)
+    <span class="hljs-comment"># &#x6267;&#x884C;</span>
+    conn.commit()
+
+    <span class="hljs-comment"># &#x66F4;&#x6539;</span>
+    count = cs1.execute(<span class="hljs-string">&apos;update zhaozhao_comic set name=&quot;&#x8D5B;&#x7F57;&#x5965;&#x7279;&#x66FC;&quot; where name=&quot;&#x5965;&#x7279;&#x66FC;&quot;&apos;</span>)
+    <span class="hljs-comment"># &#x6253;&#x5370;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x5171;&#x6709;&quot;</span>,count, <span class="hljs-string">&quot;&#x884C;&#x53D7;&#x5F71;&#x54CD;!&quot;</span>)
+    <span class="hljs-comment"># &#x6267;&#x884C;</span>
+    conn.commit()
+
+    <span class="hljs-comment"># &#x67E5;&#x8BE2;</span>
+    count = cs1.execute(<span class="hljs-string">&apos;select * from zhaozhao_comic where id &lt; 5&apos;</span>)
+    <span class="hljs-comment"># &#x6253;&#x5370;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x884C;</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x5171;&#x67E5;&#x5230;&quot;</span>,count, <span class="hljs-string">&quot;&#x884C;&#x6570;&#x636E;!&quot;</span>)
+
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(count):
+
+        result = cs1.fetchone()
+        <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x7B2C;%d&#x6B21;&#x67E5;&#x5230;&#x7684;&#x6570;&#x636E;&#x4E3A;%s:&quot;</span>%(i+<span class="hljs-number">1</span>, result))
+
+    <span class="hljs-comment"># &#x5173;&#x95ED;Cursor&#x5BF9;&#x8C61;</span>
+    cs1.close()
+    <span class="hljs-comment"># &#x5173;&#x95ED;Connection&#x5BF9;&#x8C61;</span>
+    conn.close()
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    main()
+</code></pre>
+<h1 id="mongdb">Mongdb</h1>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-3028968e4f328024.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Mongdb"></p>
+<blockquote>
+<p>MongoDB &#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;&#x5206;&#x5E03;&#x5F0F;&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x7684;NoSQL&#x6570;&#x636E;&#x5E93;.
+MongoDB&#x7531;C++&#x8BED;&#x8A00;&#x7F16;&#x5199;&#xFF0C;&#x8FD0;&#x884C;&#x7A33;&#x5B9A;&#xFF0C;&#x6027;&#x80FD;&#x9AD8;.
+MongoDB&#x65E8;&#x5728;&#x4E3A;WEB&#x5E94;&#x7528;&#x63D0;&#x4F9B;&#x53EF;&#x6269;&#x5C55;&#x7684;&#x9AD8;&#x6027;&#x80FD;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x89E3;&#x51B3;&#x65B9;&#x6848;.</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> pymongo <span class="hljs-keyword">import</span> *
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+
+    <span class="hljs-comment"># &#x521B;&#x5EFA;&#x8FDE;&#x63A5;&#x5BF9;&#x8C61;</span>
+    client=MongoClient(host=<span class="hljs-string">&apos;localhost&apos;</span>,port=<span class="hljs-number">27017</span>)
+
+    <span class="hljs-comment"># &#x83B7;&#x5F97;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x6B64;&#x5904;&#x4F7F;&#x7528;python&#x6570;&#x636E;&#x5E93;</span>
+    db=client.python
+
+    <span class="hljs-comment"># &#x589E;&#x52A0;</span>
+
+    db.stu.insert_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x4F50;&#x52A9;&apos;</span>,<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x7537;&apos;</span>})
+    db.stu.insert_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x6625;&#x91CE;&#x6A31;&apos;</span>,<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x5973;&apos;</span>})
+    db.stu.insert_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x8499;&#x5947; D &#x8DEF;&#x98DE;&apos;</span>,<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x7537;&apos;</span>})
+    db.stu.insert_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x7D22;&#x9686;&apos;</span>,<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x7537;&apos;</span>})
+    db.stu.insert_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x5A1C;&#x7F8E;&apos;</span>,<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x5973;&apos;</span>})
+
+
+    <span class="hljs-comment"># &#x67E5;&#x8BE2;</span>
+
+    <span class="hljs-comment">#&#x67E5;&#x8BE2;&#x4E00;&#x6761;&#x6587;&#x6863;</span>
+    result=db.stu.find_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x7D22;&#x9686;&apos;</span>})
+    <span class="hljs-keyword">print</span> (result)
+
+    <span class="hljs-comment">#&#x67E5;&#x8BE2;&#x591A;&#x6761;&#x6587;&#x6863;</span>
+    result=db.stu.find({<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x7537;&apos;</span>})
+
+    <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> result:
+        <span class="hljs-keyword">print</span> (<span class="hljs-string">&apos;%s--%s&apos;</span>%(item[<span class="hljs-string">&apos;name&apos;</span>],item[<span class="hljs-string">&apos;gender&apos;</span>]))
+
+
+    <span class="hljs-comment"># &#x4FEE;&#x6539;</span>
+
+    <span class="hljs-comment">#&#x66F4;&#x65B0;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x7B2C;&#x4E00;&#x6761;&#x6587;&#x6863;</span>
+    db.stu.update_one({<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x4F50;&#x52A9;&apos;</span>},{<span class="hljs-string">&apos;$set&apos;</span>:{<span class="hljs-string">&apos;name&apos;</span>:<span class="hljs-string">&apos;&#x5B87;&#x667A;&#x6CE2;&#x4F50;&#x52A9;&apos;</span>}})
+
+    <span class="hljs-comment">#&#x66F4;&#x65B0;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x6587;&#x6863;</span>
+    db.stu.update_many({<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&quot;&#x7537;&quot;</span>},{<span class="hljs-string">&apos;$set&apos;</span>:{<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;boy&apos;</span>}})
+
+
+    <span class="hljs-comment"># &#x5220;&#x9664;</span>
+    <span class="hljs-comment"># &#x5220;&#x9664;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x7B2C;&#x4E00;&#x6761;&#x6587;&#x6863;</span>
+    db.stu.delete_one({<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x7537;&apos;</span>})
+
+    <span class="hljs-comment">#&#x5220;&#x9664;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x6587;&#x6863;</span>
+    db.stu.delete_many({<span class="hljs-string">&apos;gender&apos;</span>:<span class="hljs-string">&apos;&#x5973;&apos;</span>})
+
+
+<span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&apos;__main__&apos;</span>:
+    main()
+</code></pre>
+<h1 id="redis">redis</h1>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-98b52c44821c6b13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Redis"></p>
+<blockquote>
+<p>Redis&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x7684;&#x4F7F;&#x7528;ANSI C&#x8BED;&#x8A00;&#x7F16;&#x5199;&#x3001;&#x652F;&#x6301;&#x7F51;&#x7EDC;&#x3001;&#x53EF;&#x57FA;&#x4E8E;&#x5185;&#x5B58;&#x4EA6;&#x53EF;&#x6301;&#x4E45;&#x5316;&#x7684;&#x65E5;&#x5FD7;&#x578B;&#x3001;Key-Value&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x591A;&#x79CD;&#x8BED;&#x8A00;&#x7684;API&#x3002;&#x4ECE;2010&#x5E74;3&#x6708;15&#x65E5;&#x8D77;&#xFF0C;Redis&#x7684;&#x5F00;&#x53D1;&#x5DE5;&#x4F5C;&#x7531;VMware&#x4E3B;&#x6301;.
+Redis&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#xFF08;BSD&#x8BB8;&#x53EF;&#xFF09;&#x7684;&#x3001;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x7528;&#x4F5C;&#x6570;&#x636E;&#x5E93;&#x3001;&#x7F13;&#x5B58;&#x548C;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;.</p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> redis <span class="hljs-keyword">import</span> *
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>:</span>
+
+    <span class="hljs-comment">#&#x521B;&#x5EFA;StrictRedis&#x5BF9;&#x8C61;&#xFF0C;&#x4E0E;redis&#x670D;&#x52A1;&#x5668;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;</span>
+    sr=StrictRedis()
+
+    <span class="hljs-comment"># &#x6DFB;&#x52A0;</span>
+
+    <span class="hljs-comment">#&#x6DFB;&#x52A0;&#x952E;py1&#xFF0C;&#x503C;&#x4E3A;gj</span>
+    result=sr.set(<span class="hljs-string">&apos;name&apos;</span>,<span class="hljs-string">&apos;zhaozhao&apos;</span>)
+    <span class="hljs-comment">#&#x8F93;&#x51FA;&#x54CD;&#x5E94;&#x7ED3;&#x679C;&#xFF0C;&#x5982;&#x679C;&#x6DFB;&#x52A0;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;True&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;False</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x6DFB;&#x52A0;&#x7ED3;&#x679C;:&quot;</span>,result)
+
+    <span class="hljs-comment"># &#x67E5;&#x8BE2;</span>
+
+    <span class="hljs-comment">#&#x83B7;&#x53D6;&#x952E;py1&#x7684;&#x503C;</span>
+    result = sr.get(<span class="hljs-string">&apos;name&apos;</span>)
+    <span class="hljs-comment">#&#x8F93;&#x51FA;&#x952E;&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x952E;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x8FD4;&#x56DE;None</span>
+    <span class="hljs-keyword">print</span> (<span class="hljs-string">&quot;&#x83B7;&#x53D6;&#x7684;&#x503C;&#x4E3A;:&quot;</span>,result)
+
+
+    <span class="hljs-comment"># &#x4FEE;&#x6539;</span>
+
+    <span class="hljs-comment">#&#x8BBE;&#x7F6E;&#x952E;py1&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x952E;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x5219;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x5982;&#x679C;&#x952E;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x8FDB;&#x884C;&#x6DFB;&#x52A0;</span>
+    result = sr.set(<span class="hljs-string">&apos;name&apos;</span>,<span class="hljs-string">&apos;zhaozhaolee&apos;</span>)
+    <span class="hljs-comment">#&#x8F93;&#x51FA;&#x54CD;&#x5E94;&#x7ED3;&#x679C;&#xFF0C;&#x5982;&#x679C;&#x64CD;&#x4F5C;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;True&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;False</span>
+    <span class="hljs-keyword">print</span> (result)
+
+    <span class="hljs-comment"># &#x5220;&#x9664;</span>
+
+    <span class="hljs-comment">#&#x8BBE;&#x7F6E;&#x952E;py1&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x952E;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x5219;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x5982;&#x679C;&#x952E;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x8FDB;&#x884C;&#x6DFB;&#x52A0;</span>
+    result = sr.delete(<span class="hljs-string">&apos;name&apos;</span>)
+    <span class="hljs-comment">#&#x8F93;&#x51FA;&#x54CD;&#x5E94;&#x7ED3;&#x679C;&#xFF0C;&#x5982;&#x679C;&#x5220;&#x9664;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x952E;&#x6570;&#xFF0C;&#x5426;&#x5219;&#x5219;&#x8FD4;&#x56DE;0</span>
+    <span class="hljs-keyword">print</span> (result)
+
+
+
+<span class="hljs-keyword">if</span> __name__==<span class="hljs-string">&quot;__main__&quot;</span>:
+    main()
+</code></pre>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="rwbase64.html" class="navigation navigation-prev " aria-label="上一页: 读写bas64格式">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="AnonymityChat.html" class="navigation navigation-next " aria-label="下一页: Python实现多人在线匿名聊天的小程序">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"操作数据库Mysql,Mongodb,Redis","level":"1.4.2","depth":2,"next":{"title":"Python实现多人在线匿名聊天的小程序","level":"1.4.3","depth":2,"path":"AnonymityChat.md","ref":"AnonymityChat.md","articles":[]},"previous":{"title":"读写bas64格式","level":"1.4.1","depth":2,"path":"rwbase64.md","ref":"rwbase64.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"ctrlDataBase.md","mtime":"2020-10-18T14:18:00.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+

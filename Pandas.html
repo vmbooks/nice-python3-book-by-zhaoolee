@@ -1,0 +1,861 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>机器学习三剑客之Pandas - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    <link rel="next" href="Safe.html" />
+    <link rel="prev" href="Numpy.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >机器学习三剑客之Pandas</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-b75459db6e582aa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pandas"></p>
+<h4 id="pandas&#x662F;&#x57FA;&#x4E8E;numpy&#x5F00;&#x53D1;&#x51FA;&#x7684;&#x4E13;&#x95E8;&#x7528;&#x4E8E;&#x6570;&#x636E;&#x5206;&#x6790;&#x7684;&#x5F00;&#x6E90;python&#x5E93;">Pandas&#x662F;&#x57FA;&#x4E8E;Numpy&#x5F00;&#x53D1;&#x51FA;&#x7684;,&#x4E13;&#x95E8;&#x7528;&#x4E8E;&#x6570;&#x636E;&#x5206;&#x6790;&#x7684;&#x5F00;&#x6E90;Python&#x5E93;</h4>
+</blockquote>
+<h1 id="pandas&#x7684;&#x4E24;&#x5927;&#x6838;&#x5FC3;&#x6570;&#x636E;&#x7ED3;&#x6784;">Pandas&#x7684;&#x4E24;&#x5927;&#x6838;&#x5FC3;&#x6570;&#x636E;&#x7ED3;&#x6784;</h1>
+<ul>
+<li>Series(&#x4E00;&#x7EF4;&#x6570;&#x636E;)<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-11b74156da497fa7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Series"></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-9dcf6c4eca606bec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x521B;&#x5EFA;Series&#x7684;&#x65B9;&#x6CD5;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-b3b9ead61722c10e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5141;&#x8BB8;&#x7D22;&#x5F15;&#x91CD;&#x590D;"></p>
+</blockquote>
+<ul>
+<li>DataFrame(&#x591A;&#x7279;&#x5F81;&#x6570;&#x636E;,&#x65E2;&#x6709;&#x884C;&#x7D22;&#x5F15;,&#x53C8;&#x6709;&#x5217;&#x7D22;&#x5F15;)<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-3831067a3d900038.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="DataFrame"></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-0dab7ce3b482ae8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x7D22;&#x5F15;&#x65B9;&#x6CD5;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x521B;&#x5EFA;&#x4E00;&#x4E2A;3&#x884C;4&#x5217;&#x7684;DataFrame&#x7C7B;&#x578B;&#x6570;&#x636E;</span>
+data_3_4 = pd.DataFrame(np.arange(<span class="hljs-number">10</span>, <span class="hljs-number">22</span>).reshape(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>))
+<span class="hljs-comment"># &#x6253;&#x5370;&#x6570;&#x636E;</span>
+print(data_3_4)
+
+<span class="hljs-comment"># &#x6253;&#x5370;&#x7B2C;&#x4E00;&#x884C;&#x6570;&#x636E;</span>
+print(data_3_4[:<span class="hljs-number">1</span>])
+<span class="hljs-comment"># &#x6253;&#x5370;&#x7B2C;&#x4E00;&#x5217;&#x6570;&#x636E;</span>
+print(data_3_4[:][<span class="hljs-number">0</span>])
+</code></pre>
+<ul>
+<li>DataFrame&#x7684;&#x5C5E;&#x6027;<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-ff2cd0903fb0235e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x539F;&#x59CB;&#x6570;&#x636E;"></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-1c21986007d40675.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="DataFrame&#x7684;&#x5C5E;&#x6027;"></p>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x8BFB;&#x53D6;&#x6570;&#x636E;</span>
+result = pd.read_csv(<span class="hljs-string">&quot;./students_score.csv&quot;</span>)
+<span class="hljs-comment"># &#x6570;&#x636E;&#x7684;&#x5F62;&#x72B6;</span>
+result.shape
+<span class="hljs-comment"># &#x6BCF;&#x5217;&#x6570;&#x636E;&#x7684; &#x7C7B;&#x578B;&#x4FE1;&#x606F;</span>
+result.dtypes
+<span class="hljs-comment"># &#x6570;&#x636E;&#x7684;&#x7EF4;&#x6570;</span>
+result.ndim
+<span class="hljs-comment"># &#x6570;&#x636E;&#x7684;&#x7D22;&#x5F15;(&#x8D77;/&#x59CB;/&#x6B65;&#x957F;)</span>
+result.index
+<span class="hljs-comment"># &#x6253;&#x5370;&#x6BCF;&#x4E00;&#x5217; &#x5C5E;&#x6027;&#x7684;&#x540D;&#x79F0;</span>
+result.columns
+<span class="hljs-comment"># &#x5C06;&#x6570;&#x636E;&#x653E;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#x663E;&#x793A;</span>
+result.values
+</code></pre>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-0cea033b45f06402.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6574;&#x4F53;&#x67E5;&#x8BE2;"></p>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x6253;&#x5370;&#x524D;5&#x4E2A;</span>
+print(<span class="hljs-string">&quot;--&gt;&#x524D;5&#x4E2A;:&quot;</span>)
+print(result.head(<span class="hljs-number">5</span>))
+<span class="hljs-comment"># &#x6253;&#x5370;&#x540E;5&#x4E2A;</span>
+print(<span class="hljs-string">&quot;--&gt;&#x540E;5&#x4E2A;:&quot;</span>)
+print(result.tail(<span class="hljs-number">5</span>))
+<span class="hljs-comment"># &#x6253;&#x5370;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;(&#x5B9E;&#x9A8C;&#x4E2D;&#x597D;&#x7528;)</span>
+print(<span class="hljs-string">&quot;--&gt;&#x63CF;&#x8FF0;&#x4FE1;&#x606F;:&quot;</span>)
+print(result.describe())
+</code></pre>
+</blockquote>
+<h1 id="panda&#x6570;&#x636E;&#x8BFB;&#x53D6;&#x4EE5;csv&#x4E3A;&#x4F8B;">Panda&#x6570;&#x636E;&#x8BFB;&#x53D6;(&#x4EE5;csv&#x4E3A;&#x4F8B;)</h1>
+<pre><code>pandas.read_csv(filepath_or_buffer, sep=&quot;,&quot;, names=None, usecols = None)
+
+filepath_or_buffer : &#x6587;&#x4EF6;&#x8DEF;&#x5F84;(&#x672C;&#x5730;&#x8DEF;&#x5F84;&#x6216;url&#x8DEF;&#x5F84;)
+sep: &#x5206;&#x9694;&#x7B26;
+names: &#x5217;&#x7D22;&#x5F15;&#x7684;&#x540D;&#x5B57;
+usecols: &#x6307;&#x5B9A;&#x8BFB;&#x53D6;&#x7684;&#x5217;&#x540D;
+
+&#x8FD4;&#x56DE;&#x7684;&#x7C7B;&#x578B;: DataFrame
+</code></pre><blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-b67496680d23533c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8BFB;&#x53D6;&#x5E76;&#x8FD4;&#x56DE;&#x6570;&#x636E;"></p>
+</blockquote>
+<ul>
+<li>Dataframe&#x901A;&#x8FC7;&#x5E03;&#x5C14;&#x7D22;&#x5F15;&#x8FC7;&#x6EE4;&#x6570;&#x636E;</li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-6b274c2e96d5a9e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5E03;&#x5C14;&#x7D22;&#x5F15;"></p>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x5E03;&#x5C14;&#x7D22;&#x5F15;(&#x67E5;&#x8BE2;) &#x627E;&#x51FA;&#x5E74;&#x9F84;&#x5927;&#x4E8E;23&#x5C81;&#x7684;&#x4EBA;</span>
+result[result[<span class="hljs-string">&quot;age&quot;</span>]&gt;<span class="hljs-number">23</span>]
+</code></pre>
+</blockquote>
+<h2 id="&#x5C0F;&#x6848;&#x4F8B;-&#x5206;&#x6790;2006&#x5E74;&#x81F3;2016&#x5E74;1000&#x90E8;imdb&#x7535;&#x5F71;&#x6570;&#x636E;">&#x5C0F;&#x6848;&#x4F8B;: &#x5206;&#x6790;2006&#x5E74;&#x81F3;2016&#x5E74;1000&#x90E8;IMDB<a href="https://www.kaggle.com/damianpanek/sunday-eda/data" target="_blank">&#x7535;&#x5F71;&#x6570;&#x636E;</a></h2>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-f95f29435413d64d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2006&#x5E74;----2016&#x5E74;IMDB&#x6700;&#x53D7;&#x6B22;&#x8FCE;&#x7684;1000&#x90E8;&#x7535;&#x5F71;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-c890999f37c7d582.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8BC4;&#x5206;&#x964D;&#x5E8F;&#x6392;&#x5217;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-6a88b0abc9db4e7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x7EDF;&#x8BA1;&#x65F6;&#x957F;"></p>
+</blockquote>
+<pre><code class="lang-python">IMDB_1000 = pd.read_csv(<span class="hljs-string">&quot;./IMDB-Movie-Data.csv&quot;</span>)
+<span class="hljs-comment"># &#x83B7;&#x53D6;&#x6570;&#x636E;&#x5B57;&#x6BB5;</span>
+print(IMDB_1000.dtypes)
+<span class="hljs-comment"># &#x6839;&#x636E;1000&#x90E8;&#x7535;&#x5F71;&#x8BC4;&#x5206;&#x8FDB;&#x884C;&#x964D;&#x5E8F;&#x6392;&#x5217;,&#x53C2;&#x6570;ascending, &#x9ED8;&#x8BA4;&#x4E3A;True(&#x5347;&#x5E8F;), &#x8FD9;&#x91CC;&#x4E3A;False(&#x964D;&#x5E8F;)</span>
+IMDB_1000.sort_values(by=<span class="hljs-string">&quot;Rating&quot;</span>, ascending=<span class="hljs-keyword">False</span>)
+<span class="hljs-comment"># &#x65F6;&#x95F4;&#x6700;&#x957F;&#x7684;&#x7535;&#x5F71;</span>
+IMDB_1000[IMDB_1000[<span class="hljs-string">&quot;Runtime (Minutes)&quot;</span>]==IMDB_1000[<span class="hljs-string">&quot;Runtime (Minutes)&quot;</span>].max()]
+<span class="hljs-comment"># &#x65F6;&#x95F4;&#x6700;&#x77ED;&#x7684;&#x7535;&#x5F71;</span>
+IMDB_1000[IMDB_1000[<span class="hljs-string">&quot;Runtime (Minutes)&quot;</span>]==IMDB_1000[<span class="hljs-string">&quot;Runtime (Minutes)&quot;</span>].min()]
+<span class="hljs-comment"># &#x7535;&#x5F71;&#x65F6;&#x957F;&#x5E73;&#x5747;&#x503C;</span>
+IMDB_1000[<span class="hljs-string">&quot;Runtime (Minutes)&quot;</span>].mean()
+</code></pre>
+<h1 id="&#x6570;&#x636E;&#x5904;&#x7406;">&#x6570;&#x636E;&#x5904;&#x7406;</h1>
+<ul>
+<li>&#x5B58;&#x5728;&#x7F3A;&#x5931;&#x503C;, &#x76F4;&#x63A5;&#x5220;&#x9664;&#x6570;&#x636E;(&#x5220;&#x9664;&#x5B58;&#x5728;&#x7F3A;&#x5931;&#x503C;&#x7684;&#x6837;&#x672C;)</li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-31b0796323226d06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5220;&#x9664;&#x5B58;&#x5728;&#x7F3A;&#x5931;&#x503C;&#x7684;&#x6837;&#x672C;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x5220;&#x9664;&#x5B58;&#x5728;&#x7F3A;&#x5931;&#x503C;&#x7684;&#x6837;&#x672C;</span>
+IMDB_1000.dropna()
+</code></pre>
+<blockquote>
+<p>&#x4E0D;&#x63A8;&#x8350;&#x7684;&#x64CD;&#x4F5C;: &#x6309;&#x5217;&#x5220;&#x9664;&#x7F3A;&#x5931;&#x503C;&#x4E3A;<code>IMDB_1000.dropna(axis=1)</code></p>
+</blockquote>
+<ul>
+<li>&#x5B58;&#x5728;&#x7F3A;&#x5931;&#x503C;, &#x76F4;&#x63A5;&#x586B;&#x5145;&#x6570;&#x636E;<code>fillna</code></li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-60d78204cb5999de.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x586B;&#x5145;&#x7A7A;&#x7F3A;&#x503C;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-137381be43209c63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x4F7F;&#x7528;&#x5E73;&#x5747;&#x503C;&#x586B;&#x5145;&#x6570;&#x636E;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x4E3A;&#x4E00;&#x4E9B;&#x7535;&#x5F71;&#x7F3A;&#x5931;&#x7684;&#x603B;&#x7968;&#x623F;&#x6DFB;&#x52A0;&#x5E73;&#x5747;&#x503C;</span>
+IMDB_1000[<span class="hljs-string">&quot;Revenue (Millions)&quot;</span>].fillna(IMDB_1000[<span class="hljs-string">&quot;Revenue (Millions)&quot;</span>].mean(), inplace=<span class="hljs-keyword">True</span>)
+</code></pre>
+<h3 id="&#x5C0F;&#x6848;&#x4F8B;-&#x4E73;&#x817A;&#x764C;&#x6570;&#x636E;&#x9884;&#x5904;&#x7406;-&#x5728;&#x7EBF;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x5E76;&#x66FF;&#x6362;&#x7F3A;&#x5931;&#x7B26;&#x53F7;&#x4E3A;&#x6807;&#x51C6;&#x7F3A;&#x5931;&#x7B26;&#x53F7;npnan">&#x5C0F;&#x6848;&#x4F8B;: &#x4E73;&#x817A;&#x764C;&#x6570;&#x636E;&#x9884;&#x5904;&#x7406; (&#x5728;&#x7EBF;&#x83B7;&#x53D6;&#x6570;&#x636E;,&#x5E76;&#x66FF;&#x6362;&#x7F3A;&#x5931;&#x7B26;&#x53F7;&#x4E3A;&#x6807;&#x51C6;&#x7F3A;&#x5931;&#x7B26;&#x53F7;<code>np.nan</code>)</h3>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-f00ebb389a88a552.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x66FF;&#x6362;&#x9ED8;&#x8BA4;&#x7684;&#x7F3A;&#x5931;&#x7B26;&#x53F7;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-f99f946dd3dea81d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5404;&#x5217;&#x547D;&#x540D;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-1f0b98d7084ea9ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8BFB;&#x53D6;&#x539F;&#x59CB;&#x6570;&#x636E;"></p>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x5728;&#x7EBF;&#x8BFB;&#x53D6;&#x6570;&#x636E;,&#x5E76;&#x6309;&#x7167;&#x8BF4;&#x660E;&#x6587;&#x6863;, &#x5E76;&#x5BF9;&#x5404;&#x5217;&#x4FE1;&#x606F;&#x8FDB;&#x884C;&#x547D;&#x540D;</span>
+bcw = pd.read_csv(<span class="hljs-string">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/breast-cancer-wisconsin.data&quot;</span>, names=[<span class="hljs-string">&quot;Sample code number&quot;</span>,<span class="hljs-string">&quot;Clump Thickness&quot;</span>,<span class="hljs-string">&quot;Uniformity of Cell Size&quot;</span>,<span class="hljs-string">&quot;Uniformity of Cell Shape&quot;</span>, <span class="hljs-string">&quot;Marginal Adhesion&quot;</span>,<span class="hljs-string">&quot;Single Epithelial Cell Size&quot;</span>,<span class="hljs-string">&quot;Bare Nuclei&quot;</span>,<span class="hljs-string">&quot;Bland Chromatin&quot;</span>,<span class="hljs-string">&quot;Normal Nucleoli&quot;</span>,<span class="hljs-string">&quot;Mitoses&quot;</span>,<span class="hljs-string">&quot;Class:&quot;</span>])
+</code></pre>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-5f0e260d39f78178.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x9884;&#x5904;&#x7406;,&#x628A;?&#x66FF;&#x6362;&#x4E3A;np.nan"></p>
+</blockquote>
+<h3 id="&#x5C0F;&#x6848;&#x4F8B;-&#x65E5;&#x671F;&#x683C;&#x5F0F;&#x8F6C;&#x6362;-&#x6570;&#x636E;&#x6765;&#x6E90;">&#x5C0F;&#x6848;&#x4F8B;: &#x65E5;&#x671F;&#x683C;&#x5F0F;&#x8F6C;&#x6362; <a href="https://www.kaggle.com/c/facebook-v-predicting-check-ins/data" target="_blank">&#x6570;&#x636E;&#x6765;&#x6E90;</a></h3>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-650c4c9c9eb0e906.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="facebook"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-c486f8310732eaa6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x65E5;&#x671F;&#x683C;&#x5F0F;&#x8F6C;&#x6362;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x8BFB;&#x53D6;&#x524D;10&#x884C;&#x6570;&#x636E;</span>
+train = pd.read_csv(<span class="hljs-string">&quot;./train.csv&quot;</span>, nrows = <span class="hljs-number">10</span>)
+<span class="hljs-comment"># &#x5C06;&#x6570;&#x636E;&#x4E2D;&#x7684;time&#x8F6C;&#x6362;&#x4E3A;&#x6700;&#x5C0F;&#x5206;&#x5EA6;&#x503C;&#x4E3A;&#x79D2;(s)&#x7684;&#x8BA1;&#x91CF;&#x5355;&#x4F4D;</span>
+train[<span class="hljs-string">&quot;time&quot;</span>] = pd.to_datetime(train[<span class="hljs-string">&quot;time&quot;</span>], unit=<span class="hljs-string">&quot;s&quot;</span>)
+</code></pre>
+<ul>
+<li>&#x4ECE;&#x65E5;&#x671F;&#x4E2D;&#x62C6;&#x5206;&#x51FA;&#x65B0;&#x7684;&#x5217;</li>
+</ul>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-2a9b57d53aa84fdb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x65B0;&#x589E;&#x5217;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x65B0;&#x589E;&#x5217;year, month, weekday</span>
+train[<span class="hljs-string">&quot;year&quot;</span>] = pd.DatetimeIndex(train[<span class="hljs-string">&quot;time&quot;</span>]).year
+train[<span class="hljs-string">&quot;month&quot;</span>] = pd.DatetimeIndex(train[<span class="hljs-string">&quot;time&quot;</span>]).month
+train[<span class="hljs-string">&quot;weekday&quot;</span>] = pd.DatetimeIndex(train[<span class="hljs-string">&quot;time&quot;</span>]).weekday
+</code></pre>
+<h2 id="&#x6570;&#x636E;&#x8868;&#x7684;&#x5408;&#x5E76;merge">&#x6570;&#x636E;&#x8868;&#x7684;&#x5408;&#x5E76;(merge)</h2>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-ee56e74477752900.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6570;&#x636E;"></p>
+</blockquote>
+<pre><code class="lang-csv">user_info.csv
+user_id,&#x59D3;&#x540D;,age
+1,&#x5F90;&#x4E09;,23
+2,&#x5F90;&#x56DB;,22
+3,&#x5B9D;&#x513F;,210
+4,&#x695A;&#x5C9A;,21
+5,&#x738B;&#x4E5F;,24
+6,&#x8BF8;&#x845B;&#x9752;,21
+7,&#x5929;&#x5E08;,89
+8,&#x5415;&#x6881;,24
+9,&#x590F;&#x79BE;,26
+</code></pre>
+<pre><code class="lang-csv">goods_info.csv
+goods_id,goods_name
+G10,&#x4E09;&#x53EA;&#x677E;&#x9F20;
+G12,MacBook
+G13,iPad
+G14,iPhone
+</code></pre>
+<pre><code class="lang-csv">order_info.csv
+order_id,use_id,goods_name
+as789,1,&#x4E09;&#x53EA;&#x677E;&#x9F20;
+sd567,2,MacBook
+hj456,4,iPad
+</code></pre>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-959cc6c098613eaa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5408;&#x5E76;&#x8FC7;&#x7A0B;"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x8BFB;&#x53D6;3&#x5F20;&#x8868;</span>
+user_info = pd.read_csv(<span class="hljs-string">&quot;./user_info.csv&quot;</span>)
+order_info = pd.read_csv(<span class="hljs-string">&quot;./order_info.csv&quot;</span>)
+goods_info = pd.read_csv(<span class="hljs-string">&quot;./goods_info.csv&quot;</span>)
+<span class="hljs-comment"># &#x5408;&#x5E76;&#x4E09;&#x5F20;&#x8868;</span>
+u_o = pd.merge(user_info, order_info, how=<span class="hljs-string">&quot;left&quot;</span>, on=[<span class="hljs-string">&quot;user_id&quot;</span>, <span class="hljs-string">&quot;user_id&quot;</span>])
+u_o_g = pd.merge(u_o, goods_info, how=<span class="hljs-string">&quot;left&quot;</span>, on=[<span class="hljs-string">&quot;goods_name&quot;</span>, <span class="hljs-string">&quot;goods_name&quot;</span>])
+</code></pre>
+<ul>
+<li>&#x5EFA;&#x7ACB;&#x4EA4;&#x53C9;&#x8868;(&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x5206;&#x7EC4;&#x7684;&#x9891;&#x7387;)<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-bbc515c78c1ef3db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x4EA4;&#x53C9;&#x8868;"></p>
+</blockquote>
+</li>
+</ul>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x4EA4;&#x53C9;&#x8868;, &#x8868;&#x793A;&#x51FA;&#x7528;&#x6237;&#x59D3;&#x540D;,&#x548C;&#x5546;&#x54C1;&#x540D;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;</span>
+user_goods = pd.crosstab(u_o_g[<span class="hljs-string">&quot;&#x59D3;&#x540D;&quot;</span>],u_o_g[<span class="hljs-string">&quot;goods_name&quot;</span>])
+</code></pre>
+<h1 id="pandas&#x7684;&#x5206;&#x7EC4;&#x548C;&#x805A;&#x5408;&#x91CD;&#x8981;">Pandas&#x7684;&#x5206;&#x7EC4;&#x548C;&#x805A;&#x5408;(&#x91CD;&#x8981;)</h1>
+<blockquote>
+<p>&#x5C0F;&#x6848;&#x4F8B;: &#x661F;&#x5DF4;&#x514B;&#x5168;&#x7403;&#x5206;&#x5E03;&#x60C5;&#x51B5;       <a href="https://www.kaggle.com/starbucks/store-locations" target="_blank">&#x6570;&#x636E;&#x6765;&#x6E90;</a>
+<img src="http://upload-images.jianshu.io/upload_images/3203841-5ae66ce5892be18f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5168;&#x7403;&#x661F;&#x5DF4;&#x514B;&#x5206;&#x5E03;&#x60C5;&#x51B5;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-6a6a9a71c0dddc64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x8BFB;&#x53D6;&#x5168;&#x7403;&#x661F;&#x5DF4;&#x514B;&#x7684;&#x4F4D;&#x7F6E;&#x6570;&#x636E;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-545dd2b697deb9f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6BCF;&#x4E2A;&#x56FD;&#x5BB6;&#x661F;&#x5DF4;&#x514B;&#x7684;&#x6570;&#x91CF;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-328c7e7c70559166.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x6BCF;&#x4E2A;&#x56FD;&#x5BB6;&#x6BCF;&#x4E2A;&#x7701;&#x4EFD;&#x661F;&#x5DF4;&#x514B;&#x7684;&#x6570;&#x91CF;"></p>
+</blockquote>
+<pre><code class="lang-python">starbucks = pd.read_csv(<span class="hljs-string">&quot;./directory.csv&quot;</span>)
+<span class="hljs-comment"># &#x7EDF;&#x8BA1;&#x6BCF;&#x4E2A;&#x56FD;&#x5BB6;&#x661F;&#x5DF4;&#x514B;&#x7684;&#x6570;&#x91CF;</span>
+starbucks.groupby([<span class="hljs-string">&quot;Country&quot;</span>]).count()
+<span class="hljs-comment"># &#x7EDF;&#x8BA1;&#x6BCF;&#x4E2A;&#x56FD;&#x5BB6; &#x6BCF;&#x4E2A;&#x7701;&#x4EFD; &#x661F;&#x5DF4;&#x514B;&#x7684;&#x6570;&#x91CF;</span>
+starbucks.groupby([<span class="hljs-string">&quot;Country&quot;</span>, <span class="hljs-string">&quot;State/Province&quot;</span>]).count()
+</code></pre>
+<ul>
+<li>&#x5168;&#x7403;&#x5404;&#x56FD;&#x661F;&#x5DF4;&#x514B;&#x6570;&#x91CF;&#x6392;&#x540D;<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-681b0c70b6752df8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x5168;&#x7403;&#x661F;&#x5DF4;&#x514B;&#x6570;&#x91CF;&#x6392;&#x540D;"></p>
+</blockquote>
+</li>
+</ul>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Numpy.html" class="navigation navigation-prev " aria-label="上一页: 机器学习三剑客之Numpy">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Safe.html" class="navigation navigation-next " aria-label="下一页: 安全渗透">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"机器学习三剑客之Pandas","level":"1.5.7","depth":2,"next":{"title":"安全渗透","level":"1.6","depth":1,"path":"Safe.md","ref":"Safe.md","articles":[{"title":"保护隐私, 删除图片源信息","level":"1.6.1","depth":2,"path":"rmSourceData.md","ref":"rmSourceData.md","articles":[]},{"title":"刺探星巴克无线网，记录顾客信息","level":"1.6.2","depth":2,"path":"scapyStarBack.md","ref":"scapyStarBack.md","articles":[]},{"title":"安装配置Kali虚拟机","level":"1.6.3","depth":2,"path":"InstallKali.md","ref":"InstallKali.md","articles":[]}]},"previous":{"title":"机器学习三剑客之Numpy","level":"1.5.6","depth":2,"path":"Numpy.md","ref":"Numpy.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"Pandas.md","mtime":"2020-10-18T14:18:00.131Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+

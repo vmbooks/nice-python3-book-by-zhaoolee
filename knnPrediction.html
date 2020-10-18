@@ -1,0 +1,747 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>K近邻(knn)算法预测电影类型 - 超级棒的python3书 - 开源图书(OpenBooks)</title>
+        
+        <meta name="description" content="">
+        
+        
+        <script data-ad-client="ca-pub-9312750344484857" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/style.css">
+
+    
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/images/favicon.ico" type="image/x-icon">
+
+    <link rel="next" href="Matplotlab.html" />
+    <link rel="prev" href="TensorflowView.html" />
+
+    </head>
+    <body>
+        
+<div class="book">  
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+	<a href="/" class="btn pull-left" aria-label="开源图书(OpenBooks)"><i class="fa fa-home"></i></a>
+    
+
+    <!-- Title -->
+    <h1><i class="fa fa-circle-o-notch fa-spin"></i><a href="." >K近邻(knn)算法预测电影类型</a></h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <section class="normal markdown-section">
+                                
+                                <blockquote>
+<p>K&#x8FD1;&#x90BB;&#x601D;&#x60F3;: &#x6839;&#x636E;&#x4F60;&#x7684;&quot;&#x90BB;&#x5C45;&#x4EEC;&quot;&#x6765;&#x786E;&#x5B9A;&#x4F60;&#x7684;&#x7C7B;&#x522B;</p>
+<p>&#x4F60;&#x4E00;&#x89C9;&#x9192;&#x6765;,&#x4E0D;&#x77E5;&#x9053;&#x81EA;&#x5DF1;&#x8EAB;&#x5728;&#x4F55;&#x65B9;&#x91CC;,&#x4F60;&#x80FD;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x673A;&#x5B9A;&#x4F4D;&#x5230;&#x5468;&#x56F4;5&#x4E2A;&quot;&#x6700;&#x8FD1;&#x7684;&quot;&#x90BB;&#x5C45;,&#x5176;&#x4E2D;&#x6709;4&#x4E2A;&#x8EAB;&#x5904;&#x706B;&#x661F;,1&#x4E2A;&#x8EAB;&#x5904;&#x6708;&#x7403;,&#x4F60;&#x8BA4;&#x4E3A;&#x5E94;&#x8BE5;&#x81EA;&#x5DF1;&#x8DDD;&#x706B;&#x661F;&#x66F4;&#x8FD1;,&#x81EA;&#x5DF1;&#x5E94;&#x8BE5;&#x5728;&#x706B;&#x661F;...(K&#x8FD1;&#x90BB;&#x7B97;&#x6CD5;&#x53C8;&#x79F0;&#x4E3A;Knn&#x7B97;&#x6CD5;,&#x5C5E;&#x4E8E;&#x5206;&#x7C7B;&#x7B97;&#x6CD5;)</p>
+</blockquote>
+<h1 id="&#x6848;&#x4F8B;1">&#x6848;&#x4F8B;1</h1>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">knncls</span><span class="hljs-params">()</span>:</span>
+
+    <span class="hljs-string">&quot;&quot;&quot;
+    &#x9884;&#x6D4B;&#x7535;&#x5F71;&#x5206;&#x7C7B;
+    :return:
+    &quot;&quot;&quot;</span>
+    data = pd.read_csv(<span class="hljs-string">&quot;./data/movies.csv&quot;</span>)
+    <span class="hljs-comment"># &#x63D0;&#x53D6;&#x7279;&#x5F81;&#x503C;, &#x76EE;&#x6807;&#x503C;</span>
+    x = data.drop([<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;movie_name&quot;</span>], axis=<span class="hljs-number">1</span>)
+    y = data[<span class="hljs-string">&quot;type&quot;</span>]
+    <span class="hljs-comment"># &#x5206;&#x5272;&#x6570;&#x636E;&#x96C6;</span>
+    x_train, x_test, y_train, y_test =train_test_split(x, y, test_size=<span class="hljs-number">0.25</span>)
+
+    <span class="hljs-comment"># &#x901A;&#x8FC7;knn&#x8FDB;&#x884C;&#x9884;&#x6D4B;</span>
+    knn = KNeighborsClassifier()
+
+    knn.fit(x_train, y_train)
+
+    y_predict = knn.predict(x_test)
+    print(x_test, <span class="hljs-string">&quot;&#x7684;&#x9884;&#x6D4B;&#x7ED3;&#x679C;&#x4E3A;:&quot;</span>, y_predict)
+
+    print(<span class="hljs-string">&quot;&#x9884;&#x6D4B;&#x51C6;&#x786E;&#x7387;&#x4E3A;:&quot;</span>, knn.score(x_test, y_test))
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    knncls()
+</code></pre>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-249c12af6b219b58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&#x51C6;&#x786E;&#x7387;"></p>
+<pre><code>movie_name,fight,kiss,type
+California Man,3,104,1
+He&apos;s not Really into dues,2,100,1
+Beautiful Woman,1,81,1
+Kevin Longblade,101,10,2
+Robo Slayer 3000,99,5,2
+Amped II,98,2,2
+unname,18,90,1
+vampire,90,15,2
+</code></pre></blockquote>
+<h1 id="&#x6848;&#x4F8B;2-facebook&#x5165;&#x4F4F;&#x5730;&#x70B9;">&#x6848;&#x4F8B;2 <a href="https://www.kaggle.com/c/facebook-v-predicting-check-ins/data" target="_blank">Facebook&#x5165;&#x4F4F;&#x5730;&#x70B9;</a></h1>
+<blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-55688330701f46f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="facebook&#x9884;&#x6D4B;&#x5165;&#x4F4F;&#x5730;&#x70B9;"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3203841-242eb6724ff0d18a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="train_data"></p>
+</blockquote>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier
+<span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">knncls</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-string">&quot;&quot;&quot;
+    facebook&#x9898;&#x76EE;:k&#x8FD1;&#x90BB;&#x7B97;&#x6CD5;&#x9884;&#x6D4B;&#x5165;&#x4F4F;&#x4F4D;&#x7F6E;
+    :return:
+    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># &#x4F7F;&#x7528;pandas&#x8BFB;&#x53D6;100000&#x6570;&#x636E;</span>
+    train_data = pd.read_csv(<span class="hljs-string">&quot;./data/fb/train.csv&quot;</span>, nrows = <span class="hljs-number">100000</span>)
+
+    <span class="hljs-comment"># &#x7279;&#x5F81;&#x5DE5;&#x7A0B;</span>
+    <span class="hljs-comment"># 1.&#x7F29;&#x5C0F;x,y&#x7684;&#x8303;&#x56F4;</span>
+    train_data = train_data.query(<span class="hljs-string">&quot;x&gt;1.0 &amp; x&lt;1.5 &amp; y&gt;1.0 &amp; y&lt;2.5&quot;</span>)
+
+    <span class="hljs-comment"># 2.&#x89E3;&#x6790;&#x65F6;&#x95F4;&#x6233;</span>
+    time_value = pd.to_datetime(train_data[<span class="hljs-string">&quot;time&quot;</span>], unit=<span class="hljs-string">&quot;s&quot;</span>)
+    time_value = pd.DatetimeIndex(time_value)
+
+    <span class="hljs-comment"># 3.&#x6DFB;&#x52A0;&#x7279;&#x5F81;(&#x65F6;&#x95F4;)</span>
+    train_data[<span class="hljs-string">&quot;weekday&quot;</span>] = time_value.weekday
+    train_data[<span class="hljs-string">&quot;year&quot;</span>] = time_value.day
+    train_data[<span class="hljs-string">&quot;hour&quot;</span>] = time_value.hour
+    train_data[<span class="hljs-string">&quot;minute&quot;</span>] = time_value.minute
+
+    <span class="hljs-comment"># 4.&#x5220;&#x9664;&#x7279;&#x5F81;(&#x65F6;&#x95F4;&#x6233;)</span>
+    train_data = train_data.drop([<span class="hljs-string">&quot;time&quot;</span>], axis=<span class="hljs-number">1</span>)
+
+    <span class="hljs-comment"># 5.&#x53EA;&#x4FDD;&#x7559;&#x5165;&#x4F4F;&#x4EBA;&#x6570;&#x5927;&#x4E8E;5&#x7684;place,&#x751F;&#x6210;&#x65B0;&#x7684;train_data</span>
+    place_count = train_data.groupby(<span class="hljs-string">&quot;place_id&quot;</span>).count()
+    place_count_r = place_count[place_count.row_id &gt; <span class="hljs-number">3</span>].reset_index()
+    train_data = train_data[train_data[<span class="hljs-string">&quot;place_id&quot;</span>].isin(place_count_r[<span class="hljs-string">&quot;place_id&quot;</span>])]
+
+    <span class="hljs-comment"># &#x63D0;&#x53D6;&#x7279;&#x5F81;&#x503C;&#x548C;&#x76EE;&#x6807;&#x503C;</span>
+    x = train_data.drop([<span class="hljs-string">&quot;place_id&quot;</span>, <span class="hljs-string">&quot;row_id&quot;</span>], axis=<span class="hljs-number">1</span>)
+
+    y = train_data[<span class="hljs-string">&quot;place_id&quot;</span>]
+
+    <span class="hljs-comment"># &#x5206;&#x5272;&#x6570;&#x636E;&#x96C6;</span>
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=<span class="hljs-number">0.25</span>)
+
+    <span class="hljs-comment"># &#x8FDB;&#x884C;&#x6807;&#x51C6;&#x5316;</span>
+    std = StandardScaler()
+
+    x_train = std.fit_transform(x_train)
+    x_test = std.transform(x_test)
+
+    <span class="hljs-comment"># &#x5B9E;&#x4F8B;&#x5316;knn&#x4F30;&#x8BA1;&#x5668;</span>
+    knn = KNeighborsClassifier()
+
+    knn.fit(x_train, y_train)
+
+    <span class="hljs-comment"># &#x9884;&#x6D4B;&#x7ED3;&#x679C;</span>
+    y_predict = knn.predict(x_test)
+
+    <span class="hljs-comment"># &#x6253;&#x5370;&#x51C6;&#x786E;&#x7387;</span>
+    print(<span class="hljs-string">&quot;&#x51C6;&#x786E;&#x7387;&#x4E3A;:&quot;</span>,knn.score(x_test, y_test))
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    knncls()
+</code></pre>
+
+                                
+                                </section>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-9312750344484857"
+                                     data-ad-slot="2669241897"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>                                
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="TensorflowView.html" class="navigation navigation-prev " aria-label="上一页: Tensorflow可视化编程">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Matplotlab.html" class="navigation navigation-next " aria-label="下一页: 机器学习三剑客之Matplotlab">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            <a href="./">
+            
+                    
+                    编者序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="scriptBoy.html">
+            <a href="scriptBoy.html">
+            
+                    
+                    脚本小子
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="PythonGUI.html">
+            <a href="PythonGUI.html">
+            
+                    
+                    这可能是最好玩的python GUI入门实例!
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="PyCtrlWord.html">
+            <a href="PyCtrlWord.html">
+            
+                    
+                    Python 操控 Word
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="addMark.html">
+            <a href="addMark.html">
+            
+                    
+                    为图片加水印
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="changeFileName.html">
+            <a href="changeFileName.html">
+            
+                    
+                    python脚本批量修改文件名
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="MushiAttack.html">
+            <a href="MushiAttack.html">
+            
+                    
+                    虫师进击
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="tuchongMetCrawler.html">
+            <a href="tuchongMetCrawler.html">
+            
+                    
+                    当图虫遇到爬虫...
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="getIP.html">
+            <a href="getIP.html">
+            
+                    
+                    Python3获取本机公网ip
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="douyu.html">
+            <a href="douyu.html">
+            
+                    
+                    斗鱼颜值小姐姐的1000种自拍
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="douban.html">
+            <a href="douban.html">
+            
+                    
+                    爬取豆瓣电影海报(Top250)
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="BackEndDev.html">
+            <a href="BackEndDev.html">
+            
+                    
+                    后台开发
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="rwbase64.html">
+            <a href="rwbase64.html">
+            
+                    
+                    读写bas64格式
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="ctrlDataBase.html">
+            <a href="ctrlDataBase.html">
+            
+                    
+                    操作数据库Mysql,Mongodb,Redis
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="AnonymityChat.html">
+            <a href="AnonymityChat.html">
+            
+                    
+                    Python实现多人在线匿名聊天的小程序
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="diyFilter.html">
+            <a href="diyFilter.html">
+            
+                    
+                    详解Django自定义过滤器
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="MachineLearning.html">
+            <a href="MachineLearning.html">
+            
+                    
+                    机器学习
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="Titanic.html">
+            <a href="Titanic.html">
+            
+                    
+                    泰坦尼克乘客存活状况(决策树案例)
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="NaiveBayesNews.html">
+            <a href="NaiveBayesNews.html">
+            
+                    
+                    朴素贝叶斯完成新闻分类
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="TensorflowView.html">
+            <a href="TensorflowView.html">
+            
+                    
+                    Tensorflow可视化编程
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.4" data-path="knnPrediction.html">
+            <a href="knnPrediction.html">
+            
+                    
+                    K近邻(knn)算法预测电影类型
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="Matplotlab.html">
+            <a href="Matplotlab.html">
+            
+                    
+                    机器学习三剑客之Matplotlab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="Numpy.html">
+            <a href="Numpy.html">
+            
+                    
+                    机器学习三剑客之Numpy
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="Pandas.html">
+            <a href="Pandas.html">
+            
+                    
+                    机器学习三剑客之Pandas
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Safe.html">
+            <a href="Safe.html">
+            
+                    
+                    安全渗透
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="rmSourceData.html">
+            <a href="rmSourceData.html">
+            
+                    
+                    保护隐私, 删除图片源信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="scapyStarBack.html">
+            <a href="scapyStarBack.html">
+            
+                    
+                    刺探星巴克无线网，记录顾客信息
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="InstallKali.html">
+            <a href="InstallKali.html">
+            
+                    
+                    安装配置Kali虚拟机
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="NicePython.html">
+            <a href="NicePython.html">
+            
+                    
+                    NicePython
+            </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="Colab.html">
+            <a href="Colab.html">
+            
+                    
+                    Google在线深度学习神器Colab
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="pyToExe.html">
+            <a href="pyToExe.html">
+            
+                    
+                    python脚本装换为windows可执行文件
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="pyTestpy.html">
+            <a href="pyTestpy.html">
+            
+                    
+                    用python检测python---批量检查注释率是否达标
+            </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="bs.html">
+            <a href="bs.html">
+            
+                    
+                    向浏览器输入网址,到完成请求的整个过程
+            </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://book.comptechs.cn" target="_blank" class="gitbook-link"><strong>开源图书(OpenBooks)</strong></a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"K近邻(knn)算法预测电影类型","level":"1.5.4","depth":2,"next":{"title":"机器学习三剑客之Matplotlab","level":"1.5.5","depth":2,"path":"Matplotlab.md","ref":"Matplotlab.md","articles":[]},"previous":{"title":"Tensorflow可视化编程","level":"1.5.3","depth":2,"path":"TensorflowView.md","ref":"TensorflowView.md","articles":[]},"dir":"ltr"},"config":{"plugins":["theme-vmlite@git+https://github.com/vmlite/gitbook-plugin-theme-vmlite.git"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-vmlite":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"超级棒的python3书","language":"zh-hans","gitbook":"*"},"file":{"path":"knnPrediction.md","mtime":"2020-10-18T14:18:00.167Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-10-18T14:18:28.033Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/gitbook.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/gitbook-plugin-theme-default@1.0.7/_assets/website/theme.js"></script>
+    
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152683495-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-152683495-1'); 
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b6193f769a96b5f12f441649fc8d4e49";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+    </body>
+</html>
+
